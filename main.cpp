@@ -13,31 +13,46 @@ int main() {
 	ConsoleText cText("Game Play");
 	cText.setPosition(0, 2);
 	cText.Render(ConsoleText::HorizontallyCentered);
+	cText.setPosition(0, 3);
+	cText.setBackColor(light);
+	cText.setForeColor(red + light);
+	cText.Render(ConsoleText::HorizontallyCentered);
 
 	ConsoleButtonList cButtonList;
-	cButtonList.AddButton(*(new ConsoleButton("Button1", []()
+	cButtonList.AddButton(*(new ConsoleButton("Normal Button", []()
 		{
-			Cursor.setPosition(15, 2);
-			Character.setBackColor(red + light);
-			Character.setForeColor(green + light);
-			std::cout << "Buttom1~";
+			ConsoleText message("Activate~");
+			message.setPosition(20, 8);
+			message.Render();
 		}
 	)), 4, 8);
-	ConsoleButton Button2("Button2");
+
+	ConsoleButton Button2("Unavailable Button");
 	Button2.setPosition(4, 10);
 	Button2.setAvailable(false);
-	cButtonList.AddButton(Button2,Button2.getPosition());
-	cButtonList.AddButton(*(new ConsoleButton("Button3")), 4, 12);
+	cButtonList.AddButton(Button2, Button2.getPosition());
+
+	ConsoleButton Button3("Colorful Button");
+	Button3.setDefaultBackColor(green);
+	Button3.setDefaultForeColor(green + light);
+	Button3.setInactiveBackColor(yellow);
+	Button3.setInactiveForeColor(yellow + light);
+	Button3.setActiveBackColor(purple);
+	Button3.setActiveForeColor(purple + light);
+	cButtonList.AddButton(Button3, 4, 12);
+
 	cButtonList.AddButton(*(new ConsoleButton("Exit", []()
 		{
+			ConsoleText exitText("Press any key to exit.");
+			exitText.setPosition(0, 20);
+			exitText.Render(ConsoleText::HorizontallyCentered);
+			getchar();
 			exit(0);
 		}
 	)), 4, 14);
 
-	while (true) {
+	while (true)
 		cButtonList.UpdateButtonState().Render();
-	}
-
 
 	return 0;
 }

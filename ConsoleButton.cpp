@@ -3,20 +3,20 @@
 #include <iostream>
 using namespace ConsoleFunction;
 
-ConsoleButton::ConsoleButton(const std::string Name)
-	: name(Name)
+ConsoleButton::ConsoleButton(const std::string Text)
+	: ConsoleObject(Text)
 	, activateFunction([]() {})
 {
 }
 
-ConsoleButton::ConsoleButton(const std::string Name, void(*ActivateFunction)())
-	: name(Name)
+ConsoleButton::ConsoleButton(const std::string Text, void(*ActivateFunction)())
+	: ConsoleObject(Text)
 	, activateFunction(ActivateFunction)
 {
 }
 
 ConsoleButton::ConsoleButton(const ConsoleButton& button2)
-	: name(button2.name)
+	: ConsoleObject(button2)
 	, defaultBackColor(button2.defaultBackColor)
 	, defaultForeColor(button2.defaultForeColor)
 	, inactiveBackColor(button2.inactiveBackColor)
@@ -27,14 +27,15 @@ ConsoleButton::ConsoleButton(const ConsoleButton& button2)
 	, unavailableDefaultForeColor(button2.unavailableDefaultForeColor)
 	, unavailableInactiveBackColor(button2.unavailableInactiveBackColor)
 	, unavailableInactiveForeColor(button2.unavailableInactiveForeColor)
-	, active(button2.active), available(button2.available)
+	, catchMouse(button2.catchMouse)
+	, active(button2.active)
+	, available(button2.available)
 	, activateFunction(button2.activateFunction)
-	, position(button2.position)
 {
 }
 
 ConsoleButton::ConsoleButton(ConsoleButton&& button2)
-	: name(button2.name)
+	: ConsoleObject(button2)
 	, defaultBackColor(button2.defaultBackColor)
 	, defaultForeColor(button2.defaultForeColor)
 	, inactiveBackColor(button2.inactiveBackColor)
@@ -45,16 +46,18 @@ ConsoleButton::ConsoleButton(ConsoleButton&& button2)
 	, unavailableDefaultForeColor(button2.unavailableDefaultForeColor)
 	, unavailableInactiveBackColor(button2.unavailableInactiveBackColor)
 	, unavailableInactiveForeColor(button2.unavailableInactiveForeColor)
-	, active(button2.active), available(button2.available)
+	, catchMouse(button2.catchMouse)
+	, active(button2.active)
+	, available(button2.available)
 	, activateFunction(button2.activateFunction)
-	, position(button2.position)
 {
 	button2.~ConsoleButton();
 }
 
 const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 {
-	name = button2.name;
+	ConsoleObject::operator=(button2);
+
 	defaultBackColor = button2.defaultBackColor;
 	defaultForeColor = button2.defaultForeColor;
 	inactiveBackColor = button2.inactiveBackColor;
@@ -65,35 +68,20 @@ const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 	unavailableDefaultForeColor = button2.unavailableDefaultForeColor;
 	unavailableInactiveBackColor = button2.unavailableInactiveBackColor;
 	unavailableInactiveForeColor = button2.unavailableInactiveForeColor;
+
+	catchMouse = button2.catchMouse;
 	active = button2.active;
 	available = button2.available;
 
 	activateFunction = button2.activateFunction;
-	position = button2.position;
 
 	return*this;
 }
 
 const bool ConsoleButton::CatchMouse()
 {
-	catchMouse = (Mouse.getPosition().Y == position.getY() && Mouse.getPosition().X >= position.getX() && Mouse.getPosition().X <= (position.getX() + name.length()));
+	catchMouse = (Mouse.getPosition().Y == position.getY() && Mouse.getPosition().X >= position.getX() && Mouse.getPosition().X <= (position.getX() + text.length()));
 	return catchMouse;
-}
-
-const std::string ConsoleButton::getName() const
-{
-	return name;
-}
-
-const ConsolePoint2D ConsoleButton::getPosition() const
-{
-	return position;
-}
-
-const ConsoleButton& ConsoleButton::setName(const std::string name2)
-{
-	name = name2;
-	return*this;
 }
 
 const ConsoleButton& ConsoleButton::setDefaultBackColor(int color2)
@@ -168,18 +156,6 @@ const ConsoleButton& ConsoleButton::setActivateFunction(void(*ActivateFunction)(
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setPosition(const ConsolePoint2D position2)
-{
-	position = position2;
-	return*this;
-}
-
-const ConsoleButton& ConsoleButton::setPosition(const int x, const int y)
-{
-	position = ConsolePoint2D(x, y);
-	return*this;
-}
-
 const bool ConsoleButton::updateState()
 {
 	if (catchMouse && Mouse.leftDown() && !active) {
@@ -230,7 +206,7 @@ const ConsoleButton& ConsoleButton::Render() const
 	Cursor.setPosition(position);
 	Character.setBackColor(currentBackColor);
 	Character.setForeColor(currentForeColor);
-	std::cout << name;
+	std::cout << text;
 
 	return*this;
 }

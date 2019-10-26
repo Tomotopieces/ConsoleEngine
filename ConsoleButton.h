@@ -1,14 +1,12 @@
 #pragma once
-#include "ConsoleFunc.h"
-#include "Game.h"
-#include <string>
+#include "ConsoleObject.h"
 #include <vector>
 using namespace ConsoleFunction;
 
-class ConsoleButton {
+class ConsoleButton
+	: public ConsoleObject
+{
 private:
-	std::string name;
-
 	int defaultBackColor = light;		//默认 背景色
 	int defaultForeColor = black;		//默认 字色
 	int inactiveBackColor = white;			//未激活 背景色
@@ -31,15 +29,11 @@ private:
 
 	explicit ConsoleButton();
 public:
-	ConsoleButton(const std::string Name);
-	ConsoleButton(const std::string Name, void(*ActivateFunction)());
+	ConsoleButton(const std::string Text);
+	ConsoleButton(const std::string Text, void(*ActivateFunction)());
 	ConsoleButton(const ConsoleButton& option2);
 	ConsoleButton(ConsoleButton&& option2);
 	const ConsoleButton& operator=(const ConsoleButton& option2);
-
-	const std::string getName()const;
-	const ConsolePoint2D getPosition()const;
-	const ConsoleButton& setName(const std::string name2);
 
 	const ConsoleButton& setDefaultBackColor(int color2);
 	const ConsoleButton& setDefaultForeColor(int color2);
@@ -54,8 +48,6 @@ public:
 
 	const ConsoleButton& setAvailable(const bool Usable);
 	const ConsoleButton& setActivateFunction(void(*ActivateFunction)());
-	const ConsoleButton& setPosition(const ConsolePoint2D position2);
-	const ConsoleButton& setPosition(const int x, const int y);
 
 	const bool updateState();	//update active
 

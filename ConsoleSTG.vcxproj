@@ -125,11 +125,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleFunc.h" />
+    <ClInclude Include="ConsoleObject.h" />
     <ClInclude Include="ConsoleText.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ConsoleButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleObject.cpp" />
     <ClCompile Include="ConsoleText.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
