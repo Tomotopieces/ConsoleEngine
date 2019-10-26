@@ -1,0 +1,76 @@
+#pragma once
+#include "ConsoleFunc.h"
+#include "Game.h"
+#include <string>
+#include <vector>
+using namespace ConsoleFunction;
+
+class ConsoleButton {
+private:
+	std::string name;
+
+	int defaultBackColor = light;		//默认 背景色
+	int defaultForeColor = black;		//默认 字色
+	int inactiveBackColor = white;			//未激活 背景色
+	int inactiveForeColor = black;			//未激活 字色
+	int activeBackColor = white + light;		//激活 背景色
+	int activeForeColor = black;				//激活 字色
+	int unavailableDefaultBackColor = red;			//不可激活 默认 背景色
+	int unavailableDefaultForeColor = black;		//不可激活 默认 字色
+	int unavailableInactiveBackColor = red + light;		//不可激活 未激活 背景色
+	int unavailableInactiveForeColor = black;			//不可激活 未激活 字色
+
+	bool catchMouse = false;	//是否捕捉到鼠标
+	bool available = true;		//是否可激活
+	bool active = false;		//是否已激活
+
+	void(*activateFunction)();
+	ConsolePoint2D position = { 0,0 };
+
+	const bool CatchMouse();
+
+	explicit ConsoleButton();
+public:
+	ConsoleButton(const std::string Name);
+	ConsoleButton(const std::string Name, void(*ActivateFunction)());
+	ConsoleButton(const ConsoleButton& option2);
+	ConsoleButton(ConsoleButton&& option2);
+	const ConsoleButton& operator=(const ConsoleButton& option2);
+
+	const std::string getName()const;
+	const ConsolePoint2D getPosition()const;
+	const ConsoleButton& setName(const std::string name2);
+
+	const ConsoleButton& setDefaultBackColor(int color2);
+	const ConsoleButton& setDefaultForeColor(int color2);
+	const ConsoleButton& setInactiveBackColor(int color2);
+	const ConsoleButton& setInactiveForeColor(int color2);
+	const ConsoleButton& setActiveBackColor(int color2);
+	const ConsoleButton& setActiveForeColor(int color2);
+	const ConsoleButton& setUnavailableDefaultBackColor(int color2);
+	const ConsoleButton& setUnavailableDefaultForeColor(int color2);
+	const ConsoleButton& setUnavailableInactiveBackColor(int color2);
+	const ConsoleButton& setUnavailableInactiveForeColor(int color2);
+
+	const ConsoleButton& setAvailable(const bool Usable);
+	const ConsoleButton& setActivateFunction(void(*ActivateFunction)());
+	const ConsoleButton& setPosition(const ConsolePoint2D position2);
+	const ConsoleButton& setPosition(const int x, const int y);
+
+	const bool updateState();	//update active
+
+	const ConsoleButton& Render()const;
+};
+
+class ConsoleButtonList {
+private:
+	std::vector<ConsoleButton> buttonList;
+public:
+	ConsoleButtonList();
+
+	ConsoleButtonList& AddButton(ConsoleButton newButton, const ConsolePoint2D position);
+	ConsoleButtonList& AddButton(ConsoleButton newButton, const int x, const int y);
+
+	const ConsoleButtonList& Render()const;
+	const ConsoleButtonList& UpdateButtonState();
+};

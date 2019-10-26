@@ -125,13 +125,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleFunc.h" />
+    <ClInclude Include="ConsoleText.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="ButtonAndList.h" />
+    <ClInclude Include="ConsoleButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleText.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ButtonAndList.cpp" />
+    <ClCompile Include="ConsoleButton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

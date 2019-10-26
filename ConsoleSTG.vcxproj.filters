@@ -21,7 +21,10 @@
     <ClInclude Include="Game.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonAndList.h">
+    <ClInclude Include="ConsoleText.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleButton.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +35,10 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonAndList.cpp">
+    <ClCompile Include="ConsoleText.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
