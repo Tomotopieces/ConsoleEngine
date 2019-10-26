@@ -29,5 +29,9 @@ public:
 	const ConsoleText& setPosition(const ConsolePoint2D position2);
 	const ConsoleText& setPosition(const int x, const int y);
 
-	const ConsoleText& Render()const;
+	enum RenderMode {
+		Normal,					//普通
+		HorizontallyCentered,	//水平居中
+		VerticallyCentered };	//垂直居中
+	const ConsoleText& Render(RenderMode renderMode = Normal)const;
 };

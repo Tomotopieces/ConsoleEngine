@@ -5,37 +5,37 @@
 using namespace ConsoleFunction;
 
 int main() {
-	Screen.setTitle("Console Shooting Game Test");
+	Screen.setTitle("Game Test");
 	Screen.setSize(64, 32);
 	Screen.hideScrollBar();
 	Cursor.hide();
 
-	ConsoleText ctext("Game Play");
-	ctext.setPosition(4, 10);
-	ctext.Render();
+	ConsoleText cText("Game Play");
+	cText.setPosition(0, 2);
+	cText.Render(ConsoleText::HorizontallyCentered);
 
-	ConsoleButtonList cbutton;
-	cbutton.AddButton(*(new ConsoleButton("Button1", []()
+	ConsoleButtonList cButtonList;
+	cButtonList.AddButton(*(new ConsoleButton("Button1", []()
 		{
 			Cursor.setPosition(15, 2);
 			Character.setBackColor(red + light);
 			Character.setForeColor(green + light);
 			std::cout << "Buttom1~";
 		}
-	)), 4, 2);
+	)), 4, 8);
 	ConsoleButton Button2("Button2");
-	Button2.setPosition(4, 4);
+	Button2.setPosition(4, 10);
 	Button2.setAvailable(false);
-	cbutton.AddButton(Button2,Button2.getPosition());
-	cbutton.AddButton(*(new ConsoleButton("Button3")), 4, 6);
-	cbutton.AddButton(*(new ConsoleButton("Exit", []()
+	cButtonList.AddButton(Button2,Button2.getPosition());
+	cButtonList.AddButton(*(new ConsoleButton("Button3")), 4, 12);
+	cButtonList.AddButton(*(new ConsoleButton("Exit", []()
 		{
 			exit(0);
 		}
-	)), 4, 8);
+	)), 4, 14);
 
 	while (true) {
-		cbutton.UpdateButtonState().Render();
+		cButtonList.UpdateButtonState().Render();
 	}
 
 

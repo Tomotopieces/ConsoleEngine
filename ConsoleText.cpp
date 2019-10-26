@@ -72,11 +72,24 @@ const ConsoleText& ConsoleText::setPosition(const int x, const int y)
 	return*this;
 }
 
-const ConsoleText& ConsoleText::Render() const
+const ConsoleText& ConsoleText::Render(RenderMode renderMode) const
 {
 	Character.setBackColor(backColor);
 	Character.setForeColor(foreColor);
-	Cursor.setPosition(position);
+	switch (renderMode) {
+		case Normal:
+			Cursor.setPosition(position);
+			break;
+		case HorizontallyCentered:
+			Cursor.setPosition(Screen.getSize().X / 2 - text.size() / 2, position.getY());
+			break;
+		case VerticallyCentered:
+			Cursor.setPosition(position.getX(), Screen.getSize().Y / 2);
+			break;
+		case HorizontallyCentered + VerticallyCentered:
+			Cursor.setPosition(Screen.getSize().X / 2 - text.size() / 2, Screen.getSize().Y / 2);
+			break;
+	}
 	std::cout << text;
 	return*this;
 }
