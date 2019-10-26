@@ -8,20 +8,20 @@
 int Rand();
 
 // 2D Map Point
-class Point {
+class ConsolePoint2D {
 private:
 	int x;
 	int y;
 public:
-	Point();
-	Point(const Point& pos2);
-	Point(const COORD& pos2);
-	Point(Point&& pos2);
-	Point(const int X, const int Y);
-	const Point& operator=(const Point pos2);
-	const Point& operator=(const COORD pos2);
-	const bool operator==(const Point& pos2)const;
-	const bool operator!=(const Point& pos2)const;
+	ConsolePoint2D();
+	ConsolePoint2D(const ConsolePoint2D& pos2);
+	ConsolePoint2D(const COORD& pos2);
+	ConsolePoint2D(ConsolePoint2D&& pos2);
+	ConsolePoint2D(const int X, const int Y);
+	const ConsolePoint2D& operator=(const ConsolePoint2D pos2);
+	const ConsolePoint2D& operator=(const COORD pos2);
+	const bool operator==(const ConsolePoint2D& pos2)const;
+	const bool operator!=(const ConsolePoint2D& pos2)const;
 	operator COORD()const;
 
 	const int getX()const;
@@ -36,75 +36,75 @@ public:
 
 // 2D Map
 template<typename T>
-class GameMap {
+class ConsoleMap2D {
 	friend class GameFunction;
 private:
-	std::vector<std::vector<T>> Map;
+	std::vector<std::vector<T>> map;
 	int width;
 	int height;
 
-	explicit GameMap();
+	explicit ConsoleMap2D();
 public:
-	GameMap(const int width, const int height);
-	GameMap(const GameMap& Map2);
-	GameMap(GameMap&& Map2);
-	virtual const GameMap<T>& operator=(const GameMap<T>& Map2);
-	virtual const bool operator==(const GameMap<T>& Map2)const;
-	virtual const bool operator!=(const GameMap<T>& Map2)const;
+	ConsoleMap2D(const int width, const int height);
+	ConsoleMap2D(const ConsoleMap2D& Map2);
+	ConsoleMap2D(ConsoleMap2D&& Map2);
+	virtual const ConsoleMap2D<T>& operator=(const ConsoleMap2D<T>& Map2);
+	virtual const bool operator==(const ConsoleMap2D<T>& Map2)const;
+	virtual const bool operator!=(const ConsoleMap2D<T>& Map2)const;
 
 	// get, not set
 	const std::vector<T>& operator[](const int x)const;
-	const T operator[](const Point pos)const;
+	const T operator[](const ConsolePoint2D pos)const;
 	
 	// get
 	const int getWidth()const;
 	const int getHeight()const;
 	const std::vector<std::vector<T>> getMap()const;
 	const T& getPoint(const int x, const int y)const;
-	const T& getPoint(const Point pos)const;
+	const T& getPoint(const ConsolePoint2D pos)const;
 
 	// set
-	const GameMap<T>& setWidth(const int Width);
-	const GameMap<T>& setHeight(const int Height);
-	const GameMap<T>& setMap(const GameMap<T>& Map2);
-	const GameMap<T>& setPoint(const int x, const int y, const T& Data2);
-	const GameMap<T>& setPoint(Point pos, const T& Data2);
+	const ConsoleMap2D<T>& setWidth(const int Width);
+	const ConsoleMap2D<T>& setHeight(const int Height);
+	const ConsoleMap2D<T>& setMap(const ConsoleMap2D<T>& Map2);
+	const ConsoleMap2D<T>& setPoint(const int x, const int y, const T& Data2);
+	const ConsoleMap2D<T>& setPoint(ConsolePoint2D pos, const T& Data2);
 
 	// others
-	const Point find(T& data2)const;
-	const std::vector<Point> findAll(T& data2)const;
+	const ConsolePoint2D find(T& data2)const;
+	const std::vector<ConsolePoint2D> findAll(T& data2)const;
 };
 
 template<typename T>
-GameMap<T>::GameMap(const int Width, const int Height)
-	:Map(std::vector<std::vector<T>>(Width, std::vector<T>(Height))), width(Width), height(Height)
+ConsoleMap2D<T>::ConsoleMap2D(const int Width, const int Height)
+	:map(std::vector<std::vector<T>>(Width, std::vector<T>(Height))), width(Width), height(Height)
 {
 }
 
 template<typename T>
-GameMap<T>::GameMap(const GameMap& Map2)
-	: Map(Map2.Map), width(Map2.width), height(Map2.height)
+ConsoleMap2D<T>::ConsoleMap2D(const ConsoleMap2D& Map2)
+	: map(Map2.map), width(Map2.width), height(Map2.height)
 {
 }
 
 template<typename T>
-GameMap<T>::GameMap(GameMap&& Map2)
-	: Map(Map2.Map), width(Map2.width), height(Map2.height)
+ConsoleMap2D<T>::ConsoleMap2D(ConsoleMap2D&& Map2)
+	: map(Map2.map), width(Map2.width), height(Map2.height)
 {
 	Map2.~Map();
 }
 
 template<typename T>
-const GameMap<T>& GameMap<T>::operator=(const GameMap<T>& Map2)
+const ConsoleMap2D<T>& ConsoleMap2D<T>::operator=(const ConsoleMap2D<T>& Map2)
 {
-	Map = Map2.Map;
+	map = Map2.map;
 	width = Map2.width;
 	height = Map2.height;
 	return*this;
 }
 
 template<typename T>
-inline const bool GameMap<T>::operator==(const GameMap<T>& Map2)const
+inline const bool ConsoleMap2D<T>::operator==(const ConsoleMap2D<T>& Map2)const
 {
 	for (int x = 0; x < width; ++x)
 		for (int y = 0; y < height; ++y)
@@ -114,19 +114,19 @@ inline const bool GameMap<T>::operator==(const GameMap<T>& Map2)const
 }
 
 template<typename T>
-inline const bool GameMap<T>::operator!=(const GameMap<T>& Map2) const
+inline const bool ConsoleMap2D<T>::operator!=(const ConsoleMap2D<T>& Map2) const
 {
 	return !operator==(Map2);
 }
 
 template<typename T>
-inline const std::vector<T>& GameMap<T>::operator[](const int x) const
+inline const std::vector<T>& ConsoleMap2D<T>::operator[](const int x) const
 {
-	return Map[x];
+	return map[x];
 }
 
 template<typename T>
-inline const T GameMap<T>::operator[](const Point pos) const
+inline const T ConsoleMap2D<T>::operator[](const ConsolePoint2D pos) const
 {
 	if(pos.exist())
 		return getPoint(pos);
@@ -134,91 +134,91 @@ inline const T GameMap<T>::operator[](const Point pos) const
 }
 
 template<typename T>
-inline const int GameMap<T>::getWidth() const
+inline const int ConsoleMap2D<T>::getWidth() const
 {
 	return width;
 }
 
 template<typename T>
-inline const int GameMap<T>::getHeight() const
+inline const int ConsoleMap2D<T>::getHeight() const
 {
 	return height;
 }
 
 template<typename T>
-const std::vector<std::vector<T>> GameMap<T>::getMap() const
+const std::vector<std::vector<T>> ConsoleMap2D<T>::getMap() const
 {
-	return Map;
+	return map;
 }
 
 template<typename T>
-const T& GameMap<T>::getPoint(const int x, const int y) const
+const T& ConsoleMap2D<T>::getPoint(const int x, const int y) const
 {
-	return Map[x][y];
+	return map[x][y];
 }
 
 template<typename T>
-const T& GameMap<T>::getPoint(const Point pos) const
+const T& ConsoleMap2D<T>::getPoint(const ConsolePoint2D pos) const
 {
 	int x = pos.getX() < width ? pos.getX() : width - 1;
 	int y = pos.getY() < height ? pos.getY() : height - 1;
-	return Map[x][y];
+	return map[x][y];
 }
 
 template<typename T>
-inline const GameMap<T>& GameMap<T>::setWidth(const int Width)
+inline const ConsoleMap2D<T>& ConsoleMap2D<T>::setWidth(const int Width)
 {
 	width = Width;
 	return*this;
 }
 
 template<typename T>
-inline const GameMap<T>& GameMap<T>::setHeight(const int Height)
+inline const ConsoleMap2D<T>& ConsoleMap2D<T>::setHeight(const int Height)
 {
 	height = Height;
 	return*this;
 }
 
 template<typename T>
-const GameMap<T>& GameMap<T>::setMap(const GameMap<T>& Map2)
+const ConsoleMap2D<T>& ConsoleMap2D<T>::setMap(const ConsoleMap2D<T>& Map2)
 {
-	this->Map = Map2.Map;
+	this->map = Map2.map;
 	width = Map2.width;
 	height = Map2.height;
 	return*this;
 }
 
 template<typename T>
-const GameMap<T>& GameMap<T>::setPoint(const int x, const int y, const T& Data2)
+const ConsoleMap2D<T>& ConsoleMap2D<T>::setPoint(const int x, const int y, const T& Data2)
 {
-	Map[x][y] = Data2;
+	map[x][y] = Data2;
 	return*this;
 }
 
 template<typename T>
-const GameMap<T>& GameMap<T>::setPoint(Point pos, const T& Data2)
+const ConsoleMap2D<T>& ConsoleMap2D<T>::setPoint(ConsolePoint2D pos, const T& Data2)
 {
-	Map[pos.getX()][pos.getY()] = Data2;
+	map[pos.getX()][pos.getY()] = Data2;
 	return*this;
 }
 
 template<typename T>
-inline const Point GameMap<T>::find(T& data2) const
+inline const ConsolePoint2D ConsoleMap2D<T>::find(T& data2) const
 {
 	for (int x = 0; x < width; ++x)
 		for (int y = 0; y < height; ++y)
 			if (getPoint(x, y) != data2)
-				return Point(x, y);
-	return Point(-1, -1);
+				return ConsolePoint2D(x, y);
+	return ConsolePoint2D(-1, -1);
 }
 
 template<typename T>
-inline const std::vector<Point> GameMap<T>::findAll(T& data2) const
+inline const std::vector<ConsolePoint2D> ConsoleMap2D<T>::findAll(T& data2) const
 {
-	std::vector<Point> list;
+	std::vector<ConsolePoint2D> list;
 	for (int x = 0; x < width++; x)
 		for (int y = 0; y < height; ++y)
 			if (getPoint(x, y) != data2)
-				list.push_back(Point(x, y));
+				list.push_back(ConsolePoint2D(x, y));
 	return list;
 }

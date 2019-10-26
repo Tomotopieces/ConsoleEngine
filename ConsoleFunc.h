@@ -16,10 +16,6 @@ namespace  ConsoleFunction {
 	//****************************************
 
 	static class CONSOLEFUNC_API MOUSE {
-	private:
-		static HANDLE handle;
-		static DWORD numRead;
-		static INPUT_RECORD inrc;
 	public:
 		MOUSE();
 
@@ -39,10 +35,6 @@ namespace  ConsoleFunction {
 	//****************************************
 
 	static class CONSOLEFUNC_API CURSOR {
-	private:
-		static HANDLE handle;
-		static CONSOLE_CURSOR_INFO CursorInfo;
-		static COORD coord;
 	public:
 		CURSOR();
 
@@ -62,14 +54,11 @@ namespace  ConsoleFunction {
 	//****************************************
 
 	static class CONSOLEFUNC_API SCREEN {
-	private:
-		static HANDLE handle;
-		static CONSOLE_SCREEN_BUFFER_INFO ScreenBufferInfo;
-		static SMALL_RECT rect;
-		static COORD coord;
 	public:
 		SCREEN();
 
+		/* 获取窗口尺寸 */
+		static const COORD getSize();
 		/* 设置标题 */
 		static bool setTitle(const char* str);
 		/* 隐藏滚动条 */
@@ -80,6 +69,8 @@ namespace  ConsoleFunction {
 		static bool window();
 		/* 设置窗口尺寸 */
 		static bool setSize(short width, short height);
+		/* 清空窗口区域 */
+		static bool clean();
 	};
 
 	//****************************************
@@ -88,12 +79,9 @@ namespace  ConsoleFunction {
 	CONSOLEFUNC_API extern SCREEN Screen;
 
 	//蓝，绿，红，加亮
-	const static enum Color { blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
+	const static enum Color { black = 0, blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
 
 	static class CONSOLEFUNC_API CHARACTER {
-	private:
-		static HANDLE handle;
-		static int currentColor;
 	public:
 		CHARACTER();
 

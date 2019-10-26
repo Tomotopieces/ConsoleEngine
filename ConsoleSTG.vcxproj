@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,12 +126,12 @@
   <ItemGroup>
     <ClInclude Include="ConsoleFunc.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="OptionalList.h" />
+    <ClInclude Include="ButtonAndList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="OptionalList.cpp" />
+    <ClCompile Include="ButtonAndList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "OptionalList.h"
+#include "ButtonAndList.h"
 #include "ConsoleFunc.h"
 #include <iostream>
 using namespace ConsoleFunction;
@@ -8,8 +8,8 @@ int main() {
 	Screen.setSize(64, 32);
 	Screen.hideScrollBar();
 	Cursor.hide();
-	OptionList opl;
-	opl.AddOption(*(new Option("Button1", []()
+	ConsoleButtonList opl;
+	opl.AddButton(*(new ConsoleButton("Button1", []()
 		{
 			Cursor.setPosition(15, 2);
 			Character.setBackColor(red + light);
@@ -17,16 +17,22 @@ int main() {
 			std::cout << "Buttom1~";
 		}
 	)), 4, 2);
-	opl.AddOption(*(new Option("Button2")), 4, 4);
-	opl.AddOption(*(new Option("Button3")), 4, 6);
-	opl.AddOption(*(new Option("Exit", []()
+	opl.AddButton(*(new ConsoleButton("Button2")), 4, 4);
+	opl.AddButton(*(new ConsoleButton("Button3")), 4, 6);
+	opl.AddButton(*(new ConsoleButton("Exit", []()
 		{
 			exit(0);
 		}
 	)), 4, 8);
 
-	while (1)
-		opl.UpdateActivatedState().Render();
+	opl.UpdateActivatedState().Render();
+	getchar();
+	Character.setBackColor(black);
+	Character.setForeColor(light);
+	std::cout << Screen.getSize().X << " " << Screen.getSize().Y;
+	bool temp = Screen.clean();
+	getchar();
+
 
 	return 0;
 }

@@ -10,77 +10,77 @@ int Rand()
 	return rand();
 }
 
-Point::Point()
+ConsolePoint2D::ConsolePoint2D()
 	:x(0), y(0)
 {
 }
 
-Point::Point(const Point& pos2)
+ConsolePoint2D::ConsolePoint2D(const ConsolePoint2D& pos2)
 	: x(pos2.x), y(pos2.y)
 {
 }
 
-Point::Point(const COORD& pos2)
+ConsolePoint2D::ConsolePoint2D(const COORD& pos2)
 	: x(pos2.X), y(pos2.Y)
 {
 }
 
-Point::Point(Point&& pos2)
+ConsolePoint2D::ConsolePoint2D(ConsolePoint2D&& pos2)
 	: x(pos2.x), y(pos2.y)
 {
-	pos2.~Point();
+	pos2.~ConsolePoint2D();
 }
 
-Point::Point(const int X, const int Y)
+ConsolePoint2D::ConsolePoint2D(const int X, const int Y)
 	: x(X), y(Y)
 {
 }
 
-const Point& Point::operator=(const Point pos2)
+const ConsolePoint2D& ConsolePoint2D::operator=(const ConsolePoint2D pos2)
 {
 	x = pos2.x;
 	y = pos2.y;
 	return*this;
 }
 
-const Point& Point::operator=(const COORD pos2)
+const ConsolePoint2D& ConsolePoint2D::operator=(const COORD pos2)
 {
 	x = pos2.X;
 	y = pos2.Y;
 	return*this;
 }
 
-const int Point::getX() const
+const int ConsolePoint2D::getX() const
 {
 	return x;
 }
 
-const int Point::getY() const
+const int ConsolePoint2D::getY() const
 {
 	return y;
 }
 
-const bool Point::exist() const
+const bool ConsolePoint2D::exist() const
 {
 	return x != -1 || y != -1;
 }
 
-const bool Point::operator==(const Point& pos2) const
+const bool ConsolePoint2D::operator==(const ConsolePoint2D& pos2) const
 {
 	return x == pos2.x && y == pos2.y;
 }
 
-const bool Point::operator!=(const Point& pos2) const
+const bool ConsolePoint2D::operator!=(const ConsolePoint2D& pos2) const
 {
 	return !operator==(pos2);
 }
 
-Point::operator COORD() const
+ConsolePoint2D::operator COORD() const
 {
 	return { short(x),short(y) };
 }
 
-void Point::ReSet(const int MaxWidth, const int MaxHeight)
+void ConsolePoint2D::ReSet(const int MaxWidth, const int MaxHeight)
 {
 	x = Rand() % MaxWidth;
 	y = Rand() % MaxHeight;
