@@ -30,5 +30,5 @@ public:
 	const ConsoleText& setForeColor(const int color2);
 	const ConsoleText& setRenderMode(const RenderMode newMode);
 
-	const ConsoleText& render()const;	//»æÖÆ
+	virtual const ConsoleText& render()const;	//»æÖÆ
 };

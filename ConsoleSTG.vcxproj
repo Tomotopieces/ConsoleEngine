@@ -124,8 +124,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleCharacter.h" />
     <ClInclude Include="ConsoleController.h" />
     <ClInclude Include="ConsoleHeader.h" />
+    <ClInclude Include="ConsoleImage.h" />
     <ClInclude Include="ConsoleObject.h" />
     <ClInclude Include="ConsoleText.h" />
     <ClInclude Include="ConsoleMap.h" />
