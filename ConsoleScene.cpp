@@ -3,18 +3,30 @@
 #include "ConsoleText.h"
 
 ConsoleScene::ConsoleScene()
+	: ConsoleObject("")
 {
 }
 
 ConsoleScene::ConsoleScene(ConsoleScene& scene2)
-	: objectList(scene2.objectList)
+	: ConsoleObject("")
+	, objectList(scene2.objectList)
 {
 }
 
 ConsoleScene::ConsoleScene(ConsoleScene&& scene2)
-	: objectList(scene2.objectList)
+	: ConsoleObject("")
+	, objectList(scene2.objectList)
 {
 	scene2.~ConsoleScene();
+}
+
+const ConsoleScene& ConsoleScene::operator=(const ConsoleScene& scene2)
+{
+	if(this == &scene2)
+		return*this;
+	ConsoleObject::operator=(scene2);
+	objectList = scene2.objectList;
+	return*this;
 }
 
 ConsoleScene& ConsoleScene::addObject(ConsoleObject* newObject)

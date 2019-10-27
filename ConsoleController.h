@@ -15,7 +15,7 @@ namespace  ConsoleController {
 	//****************************************
 	//****************************************
 
-	static class CONSOLECONTROLLER_API MOUSE {
+	class CONSOLECONTROLLER_API MOUSE {
 	private:
 		static HANDLE handle;
 		static DWORD numRead;
@@ -38,7 +38,7 @@ namespace  ConsoleController {
 	//****************************************
 	//****************************************
 
-	static class CONSOLECONTROLLER_API CURSOR {
+	class CONSOLECONTROLLER_API CURSOR {
 	private:
 		static HANDLE handle;
 		static CONSOLE_CURSOR_INFO CursorInfo;
@@ -61,7 +61,7 @@ namespace  ConsoleController {
 	//****************************************
 	//****************************************
 
-	static class CONSOLECONTROLLER_API SCREEN {
+	class CONSOLECONTROLLER_API SCREEN {
 	private:
 		static HANDLE handle;
 		static CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
@@ -93,9 +93,9 @@ namespace  ConsoleController {
 	CONSOLECONTROLLER_API extern SCREEN Screen;
 
 	//¿∂£¨¬Ã£¨∫Ï£¨º”¡¡
-	const static enum ConsoleColor { black = 0, blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
+	enum ConsoleColor { black = 0, blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
 
-	static class CONSOLECONTROLLER_API CHARACTER {
+	class CONSOLECONTROLLER_API CHARACTER {
 	private:
 		static HANDLE handle;
 		static int currentColor;

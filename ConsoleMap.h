@@ -217,7 +217,7 @@ template<typename T>
 inline const std::vector<ConsolePoint2D> ConsoleMap2D<T>::findAll(T& data2) const
 {
 	std::vector<ConsolePoint2D> list;
-	for (int x = 0; x < width++; x)
+	for (int x = 0; x < width; ++x)
 		for (int y = 0; y < height; ++y)
 			if (getPoint(x, y) != data2)
 				list.push_back(ConsolePoint2D(x, y));

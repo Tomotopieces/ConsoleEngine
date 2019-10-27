@@ -45,6 +45,16 @@ const ConsoleText& ConsoleText::operator=(const ConsoleText& text2)
 	return*this;
 }
 
+const int ConsoleText::getBackColor() const
+{
+	return backColor;
+}
+
+const int ConsoleText::getForeColor() const
+{
+	return foreColor;
+}
+
 const ConsoleText& ConsoleText::setBackColor(const int color2)
 {
 	backColor = color2;

@@ -135,6 +135,8 @@
     <ClInclude Include="ConsoleButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleCharacter.cpp" />
+    <ClCompile Include="ConsoleImage.cpp" />
     <ClCompile Include="ConsoleObject.cpp" />
     <ClCompile Include="ConsoleScene.cpp" />
     <ClCompile Include="ConsoleScene.h" />

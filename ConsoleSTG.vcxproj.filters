@@ -62,5 +62,11 @@
     <ClCompile Include="ConsoleMap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ConsoleCharacter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleImage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
