@@ -47,5 +47,11 @@
     <ClCompile Include="ConsoleObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ConsoleScene.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

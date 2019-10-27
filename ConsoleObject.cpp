@@ -8,6 +8,18 @@ ConsoleObject::ConsoleObject(const std::string Text)
 {
 }
 
+ConsoleObject::ConsoleObject(const std::string Text, const ConsolePoint2D Position)
+	: text(Text)
+	, position(Position)
+{
+}
+
+ConsoleObject::ConsoleObject(const std::string Text, const int x, const int y)
+	: text(Text)
+	, position(x, y)
+{
+}
+
 ConsoleObject::ConsoleObject(const ConsoleObject& object2)
 	: text(object2.text)
 	, position(object2.position)
@@ -50,7 +62,7 @@ const ConsoleObject& ConsoleObject::setPosition(const ConsolePoint2D position2)
 	return*this;
 }
 
-const ConsoleObject& ConsoleObject::setPosition(const int x, int y)
+const ConsoleObject& ConsoleObject::setPosition(const int x, const int y)
 {
 	position = ConsolePoint2D(x, y);
 	return*this;
@@ -59,5 +71,6 @@ const ConsoleObject& ConsoleObject::setPosition(const int x, int y)
 const ConsoleObject& ConsoleObject::render() const
 {
 	Cursor.setPosition(position);
-	std::cout << text;
+	std::cout << "O-" << text;
+	return*this;
 }

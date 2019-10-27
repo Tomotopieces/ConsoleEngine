@@ -132,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleObject.cpp" />
+    <ClCompile Include="ConsoleScene.cpp" />
+    <ClCompile Include="ConsoleScene.h" />
     <ClCompile Include="ConsoleText.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

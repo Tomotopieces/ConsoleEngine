@@ -9,6 +9,16 @@ ConsoleButton::ConsoleButton(const std::string Text)
 {
 }
 
+ConsoleButton::ConsoleButton(const std::string Text, const ConsolePoint2D Position)
+	: ConsoleObject(Text, Position)
+{
+}
+
+ConsoleButton::ConsoleButton(const std::string Text, const int x, const int y)
+	: ConsoleObject(Text, x, y)
+{
+}
+
 ConsoleButton::ConsoleButton(const std::string Text, void(*ActivateFunction)())
 	: ConsoleObject(Text)
 	, activateFunction(ActivateFunction)
@@ -156,7 +166,7 @@ const ConsoleButton& ConsoleButton::setActivateFunction(void(*ActivateFunction)(
 	return*this;
 }
 
-const bool ConsoleButton::updateState()
+const ConsoleButton& ConsoleButton::updateState()
 {
 	if (catchMouse && Mouse.leftDown() && !active) {
 		if (available) {
@@ -169,10 +179,10 @@ const bool ConsoleButton::updateState()
 
 	CatchMouse();
 
-	return active;
+	return*this;
 }
 
-const ConsoleButton& ConsoleButton::Render() const
+const ConsoleButton& ConsoleButton::render() const
 {
 	int currentBackColor;
 	int currentForeColor;
@@ -203,42 +213,41 @@ const ConsoleButton& ConsoleButton::Render() const
 		}
 	}
 
-	Cursor.setPosition(position);
 	Character.setBackColor(currentBackColor);
 	Character.setForeColor(currentForeColor);
-	std::cout << text;
-
+	ConsoleObject::render();
+	std::cout << "-B";
 	return*this;
 }
 
-ConsoleButtonList::ConsoleButtonList()
-{
-}
-
-ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const ConsolePoint2D Position)
-{
-	newButton.setPosition(Position);
-	buttonList.push_back(newButton);
-	return*this;
-}
-
-ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const int x, const int y)
-{
-	newButton.setPosition(x, y);
-	buttonList.push_back(newButton);
-	return*this;
-}
-
-const ConsoleButtonList& ConsoleButtonList::Render() const
-{
-	for (auto option = buttonList.begin(); option != buttonList.end(); ++option)
-		option->Render();
-	return*this;
-}
-
-const ConsoleButtonList& ConsoleButtonList::UpdateButtonState()
-{
-	for (auto button = buttonList.begin(); button != buttonList.end(); ++button)
-		button->updateState();
-	return*this;
-}
+//ConsoleButtonList::ConsoleButtonList()
+//{
+//}
+//
+//ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const ConsolePoint2D Position)
+//{
+//	newButton.setPosition(Position);
+//	buttonList.push_back(newButton);
+//	return*this;
+//}
+//
+//ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const int x, const int y)
+//{
+//	newButton.setPosition(x, y);
+//	buttonList.push_back(newButton);
+//	return*this;
+//}
+//
+//const ConsoleButtonList& ConsoleButtonList::render() const
+//{
+//	for (auto button = buttonList.begin(); button != buttonList.end(); ++button)
+//		button->render();
+//	return*this;
+//}
+//
+//const ConsoleButtonList& ConsoleButtonList::UpdateButtonState()
+//{
+//	for (auto button = buttonList.begin(); button != buttonList.end(); ++button)
+//		button->updateState();
+//	return*this;
+//}

@@ -23,13 +23,14 @@ private:
 	bool active = false;		// «∑Ò“—º§ªÓ
 
 	void(*activateFunction)();
-	ConsolePoint2D position = { 0,0 };
 
 	const bool CatchMouse();
 
 	explicit ConsoleButton();
 public:
 	ConsoleButton(const std::string Text);
+	ConsoleButton(const std::string Text, const ConsolePoint2D Position);
+	ConsoleButton(const std::string Text, const int x, const int y);
 	ConsoleButton(const std::string Text, void(*ActivateFunction)());
 	ConsoleButton(const ConsoleButton& option2);
 	ConsoleButton(ConsoleButton&& option2);
@@ -49,20 +50,20 @@ public:
 	const ConsoleButton& setAvailable(const bool Usable);
 	const ConsoleButton& setActivateFunction(void(*ActivateFunction)());
 
-	const bool updateState();	//update active
+	const ConsoleButton& updateState();	//update active
 
-	const ConsoleButton& Render()const;
+	const ConsoleButton& render()const;
 };
 
-class ConsoleButtonList {
-private:
-	std::vector<ConsoleButton> buttonList;
-public:
-	ConsoleButtonList();
-
-	ConsoleButtonList& AddButton(ConsoleButton newButton, const ConsolePoint2D position);
-	ConsoleButtonList& AddButton(ConsoleButton newButton, const int x, const int y);
-
-	const ConsoleButtonList& Render()const;
-	const ConsoleButtonList& UpdateButtonState();
-};
+//class ConsoleButtonList {
+//private:
+//	std::vector<ConsoleButton> buttonList;
+//public:
+//	ConsoleButtonList();
+//
+//	ConsoleButtonList& AddButton(ConsoleButton newButton, const ConsolePoint2D position);
+//	ConsoleButtonList& AddButton(ConsoleButton newButton, const int x, const int y);
+//
+//	const ConsoleButtonList& render()const;
+//	const ConsoleButtonList& UpdateButtonState();
+//};
