@@ -1,5 +1,6 @@
 #include "ConsoleScene.h"
-#include <typeinfo>
+#include "ConsoleButton.h"
+#include "ConsoleText.h"
 
 ConsoleScene::ConsoleScene()
 {
@@ -24,6 +25,8 @@ ConsoleScene& ConsoleScene::addObject(ConsoleObject* newObject)
 
 const ConsoleScene& ConsoleScene::updateState()
 {
+	if (objectList.size() == 0)
+		return*this;
 	for (ConsoleObject* pObject : objectList) {
 		ConsoleButton* pButton = dynamic_cast<ConsoleButton*>(pObject);
 		if (pButton != nullptr)
@@ -34,6 +37,8 @@ const ConsoleScene& ConsoleScene::updateState()
 
 const ConsoleScene& ConsoleScene::render() const
 {
+	if (objectList.size() == 0)
+		return*this;
 	for (ConsoleObject* pObject : objectList)
 		pObject->render();
 	return*this;

@@ -1,12 +1,12 @@
-#include "ConsoleFunc.h"
-#include "ConsoleButton.h"
-#include "ConsoleText.h"
+#pragma once
+#include "ConsoleObject.h"
 #include <vector>
 
-class ConsoleScene
+class ConsoleScene	//控制台场景
 {
 private:
-	std::vector<ConsoleObject*> objectList;
+	std::vector<ConsoleObject*> objectList;	//场景由物体构成
+
 public:
 	ConsoleScene();
 	ConsoleScene(ConsoleScene& scene2);

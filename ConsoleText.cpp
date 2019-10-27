@@ -1,5 +1,6 @@
 #include "ConsoleText.h"
 #include <iostream>
+using namespace ConsoleController;
 
 ConsoleText::ConsoleText(const std::string Text)
 	: ConsoleObject(Text)
@@ -35,6 +36,8 @@ ConsoleText::ConsoleText(ConsoleText&& text2)
 
 const ConsoleText& ConsoleText::operator=(const ConsoleText& text2)
 {
+	if (this == &text2)
+		return*this;
 	ConsoleObject::operator=(text2);
 	backColor = text2.backColor;
 	foreColor = text2.foreColor;
@@ -64,6 +67,7 @@ const ConsoleText& ConsoleText::render() const
 {
 	Character.setBackColor(backColor);
 	Character.setForeColor(foreColor);
+	
 	switch (currentMode) {
 		case Normal:
 			Cursor.setPosition(position);
@@ -78,6 +82,7 @@ const ConsoleText& ConsoleText::render() const
 			Cursor.setPosition((Screen.getSize().X - text.size()) / 2, Screen.getSize().Y / 2);
 			break;
 	}
-	std::cout << text << "-T";
+
+	std::cout << text;
 	return*this;
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include "ConsoleObject.h"
-using namespace ConsoleFunction;
+using namespace ConsoleController;
 
-class ConsoleText
+class ConsoleText	//控制台文本
 	: public ConsoleObject
 {
 public:
@@ -25,9 +25,10 @@ public:
 	ConsoleText(ConsoleText&& text2);
 	const ConsoleText& operator=(const ConsoleText& text2);
 
+	//设置颜色
 	const ConsoleText& setBackColor(const int color2);
 	const ConsoleText& setForeColor(const int color2);
 	const ConsoleText& setRenderMode(const RenderMode newMode);
 
-	const ConsoleText& render()const;
+	const ConsoleText& render()const;	//绘制
 };

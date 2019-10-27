@@ -1,9 +1,9 @@
 #pragma once
 #include "ConsoleObject.h"
 #include <vector>
-using namespace ConsoleFunction;
+using namespace ConsoleController;
 
-class ConsoleButton
+class ConsoleButton	//控制台按钮
 	: public ConsoleObject
 {
 private:
@@ -22,9 +22,9 @@ private:
 	bool available = true;		//是否可激活
 	bool active = false;		//是否已激活
 
-	void(*activateFunction)();
+	void(*activateFunction)();	//激活函数
 
-	const bool CatchMouse();
+	const bool CatchMouse();	//捕捉鼠标检测
 
 	explicit ConsoleButton();
 public:
@@ -36,6 +36,7 @@ public:
 	ConsoleButton(ConsoleButton&& option2);
 	const ConsoleButton& operator=(const ConsoleButton& option2);
 
+	//设置颜色
 	const ConsoleButton& setDefaultBackColor(int color2);
 	const ConsoleButton& setDefaultForeColor(int color2);
 	const ConsoleButton& setInactiveBackColor(int color2);
@@ -50,20 +51,7 @@ public:
 	const ConsoleButton& setAvailable(const bool Usable);
 	const ConsoleButton& setActivateFunction(void(*ActivateFunction)());
 
-	const ConsoleButton& updateState();	//update active
+	const ConsoleButton& updateState();	//更新按钮状态
 
-	const ConsoleButton& render()const;
+	const ConsoleButton& render()const;	//绘制
 };
-
-//class ConsoleButtonList {
-//private:
-//	std::vector<ConsoleButton> buttonList;
-//public:
-//	ConsoleButtonList();
-//
-//	ConsoleButtonList& AddButton(ConsoleButton newButton, const ConsolePoint2D position);
-//	ConsoleButtonList& AddButton(ConsoleButton newButton, const int x, const int y);
-//
-//	const ConsoleButtonList& render()const;
-//	const ConsoleButtonList& UpdateButtonState();
-//};

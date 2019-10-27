@@ -1,13 +1,14 @@
 #pragma once
-#include "ConsoleFunc.h"
-#include "Game.h"
+#include "ConsoleController.h"
+#pragma comment(lib, "ConsoleController.lib")
+#include "ConsoleMap.h"
 #include <string>
 
-class ConsoleObject
+class ConsoleObject	//控制台物体
 {
 protected:
-	std::string text;
-	ConsolePoint2D position = { 0,0 };
+	std::string text;					//文本
+	ConsolePoint2D position = { 0,0 };	//坐标
 
 	explicit ConsoleObject();
 public:
@@ -25,5 +26,5 @@ public:
 	const ConsoleObject& setPosition(const ConsolePoint2D position2);
 	const ConsoleObject& setPosition(const int x, const int y);
 
-	virtual const ConsoleObject& render()const;
+	virtual const ConsoleObject& render()const;	//绘制
 };

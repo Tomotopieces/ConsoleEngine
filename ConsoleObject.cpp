@@ -1,6 +1,6 @@
 #include "ConsoleObject.h"
 #include <iostream>
-using namespace ConsoleFunction;
+using namespace ConsoleController;
 
 ConsoleObject::ConsoleObject(const std::string Text)
 	: text(Text)
@@ -35,6 +35,8 @@ ConsoleObject::ConsoleObject(ConsoleObject&& object2)
 
 const ConsoleObject& ConsoleObject::operator=(const ConsoleObject& object2)
 {
+	if (this == &object2)
+		return*this;
 	text = object2.text;
 	position = object2.position;
 	return*this;
@@ -71,6 +73,6 @@ const ConsoleObject& ConsoleObject::setPosition(const int x, const int y)
 const ConsoleObject& ConsoleObject::render() const
 {
 	Cursor.setPosition(position);
-	std::cout << "O-" << text;
+	std::cout << text;
 	return*this;
 }

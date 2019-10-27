@@ -1,7 +1,5 @@
 #include "ConsoleButton.h"
-#include "ConsoleFunc.h"
-#include <iostream>
-using namespace ConsoleFunction;
+using namespace ConsoleController;
 
 ConsoleButton::ConsoleButton(const std::string Text)
 	: ConsoleObject(Text)
@@ -66,8 +64,9 @@ ConsoleButton::ConsoleButton(ConsoleButton&& button2)
 
 const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 {
+	if (this == &button2)
+		return*this;
 	ConsoleObject::operator=(button2);
-
 	defaultBackColor = button2.defaultBackColor;
 	defaultForeColor = button2.defaultForeColor;
 	inactiveBackColor = button2.inactiveBackColor;
@@ -216,38 +215,5 @@ const ConsoleButton& ConsoleButton::render() const
 	Character.setBackColor(currentBackColor);
 	Character.setForeColor(currentForeColor);
 	ConsoleObject::render();
-	std::cout << "-B";
 	return*this;
 }
-
-//ConsoleButtonList::ConsoleButtonList()
-//{
-//}
-//
-//ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const ConsolePoint2D Position)
-//{
-//	newButton.setPosition(Position);
-//	buttonList.push_back(newButton);
-//	return*this;
-//}
-//
-//ConsoleButtonList& ConsoleButtonList::AddButton(ConsoleButton newButton, const int x, const int y)
-//{
-//	newButton.setPosition(x, y);
-//	buttonList.push_back(newButton);
-//	return*this;
-//}
-//
-//const ConsoleButtonList& ConsoleButtonList::render() const
-//{
-//	for (auto button = buttonList.begin(); button != buttonList.end(); ++button)
-//		button->render();
-//	return*this;
-//}
-//
-//const ConsoleButtonList& ConsoleButtonList::UpdateButtonState()
-//{
-//	for (auto button = buttonList.begin(); button != buttonList.end(); ++button)
-//		button->updateState();
-//	return*this;
-//}

@@ -3,12 +3,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <Windows.h>
-#pragma comment(lib, "ConsoleFunc.lib")
 
 int Rand();
 
-// 2D Map Point
-class ConsolePoint2D {
+class ConsolePoint2D	//控制台二维坐标点
+{
 private:
 	int x;
 	int y;
@@ -28,15 +27,18 @@ public:
 	const int getY()const;
 
 	const bool exist()const;
-	void ReSet(const int MaxWidth, const int MaxHeight);
+	void reSet(const ConsolePoint2D pos2);
+	void reSet(const int X, const int Y);
+	void randomSet(const int MaxWidth, const int MaxHeight);
+	void randomSet(const int Top, const int Bottom, const int Left, const int Right);
 };
 
 //****************************************
 //****************************************
 
-// 2D Map
 template<typename T>
-class ConsoleMap2D {
+class ConsoleMap2D	//控制台二维地图
+{
 	friend class GameFunction;
 private:
 	std::vector<std::vector<T>> map;
@@ -52,9 +54,8 @@ public:
 	virtual const bool operator==(const ConsoleMap2D<T>& Map2)const;
 	virtual const bool operator!=(const ConsoleMap2D<T>& Map2)const;
 
-	// get, not set
-	const std::vector<T>& operator[](const int x)const;
-	const T operator[](const ConsolePoint2D pos)const;
+	const std::vector<T>& operator[](const int x)const;	// get, can't set
+	const T operator[](const ConsolePoint2D pos)const;	// get, can't set
 	
 	// get
 	const int getWidth()const;

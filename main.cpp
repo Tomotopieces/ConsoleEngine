@@ -1,6 +1,4 @@
-#include "ConsoleScene.h"
-#include <iostream>
-using namespace ConsoleFunction;
+#include "ConsoleHeader.h"
 
 int main() {
 	Screen.setTitle(" Game Test ");
@@ -34,6 +32,6 @@ int main() {
 
 	while (true)
 		cScene.updateState().render();
-
+	getchar();
 	return 0;
 }

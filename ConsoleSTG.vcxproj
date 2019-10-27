@@ -124,10 +124,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleFunc.h" />
+    <ClInclude Include="ConsoleController.h" />
+    <ClInclude Include="ConsoleHeader.h" />
     <ClInclude Include="ConsoleObject.h" />
     <ClInclude Include="ConsoleText.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="ConsoleMap.h" />
     <ClInclude Include="ConsoleButton.h" />
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +136,7 @@
     <ClCompile Include="ConsoleScene.cpp" />
     <ClCompile Include="ConsoleScene.h" />
     <ClCompile Include="ConsoleText.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ConsoleMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ConsoleButton.cpp" />
   </ItemGroup>
