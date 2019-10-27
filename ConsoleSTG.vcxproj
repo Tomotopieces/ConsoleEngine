@@ -23,6 +23,7 @@
     <ProjectGuid>{AED011B4-4250-4D4C-932B-FB04E38D565C}</ProjectGuid>
     <RootNamespace>ConsoleSTG</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ConsoleFunctions</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
