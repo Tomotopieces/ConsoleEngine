@@ -13,7 +13,7 @@ ConsoleController请参见我的这个版本库：[ConsoleController](https://gi
       ├class ConsoleObject            //物品
         ├class ConsoleText            //文本
           └class ConsoleCharacter     //字符
-            └class ConsoleImage       //图片（由字符构成）
+        ├class ConsoleImage           //图片（由字符构成）
         ├class ConsoleButton          //按钮
         └class ConsoleScene           //场景（由ConsoleObject构成)
       ├class ConsolePoint2D           //二维坐标点
