@@ -1,6 +1,17 @@
 #include "ConsoleObject.h"
 #include <iostream>
+using namespace ConsoleEngine;
 using namespace ConsoleController;
+
+int ConsoleEngine::Rand()
+{
+	static bool Seed = false;
+	if (!Seed) {
+		Seed = true;
+		srand((unsigned)time(NULL));
+	}
+	return rand();
+}
 
 ConsoleObject::ConsoleObject(const std::string Text)
 	: text(Text)
@@ -52,19 +63,19 @@ const ConsolePoint2D ConsoleObject::getPosition() const
 	return position;
 }
 
-const ConsoleObject& ConsoleObject::setText(const std::string Text)
+ConsoleObject& ConsoleObject::setText(const std::string Text)
 {
 	text = Text;
 	return*this;
 }
 
-const ConsoleObject& ConsoleObject::setPosition(const ConsolePoint2D position2)
+ConsoleObject& ConsoleObject::setPosition(const ConsolePoint2D position2)
 {
 	position = position2;
 	return*this;
 }
 
-const ConsoleObject& ConsoleObject::setPosition(const int x, const int y)
+ConsoleObject& ConsoleObject::setPosition(const int x, const int y)
 {
 	position = ConsolePoint2D(x, y);
 	return*this;

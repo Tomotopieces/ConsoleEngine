@@ -1,4 +1,5 @@
 #include "ConsoleMap.h"
+using namespace ConsoleEngine;
 
 int Rand()
 {
@@ -15,20 +16,20 @@ ConsolePoint2D::ConsolePoint2D()
 {
 }
 
-ConsolePoint2D::ConsolePoint2D(const ConsolePoint2D& pos2)
-	: x(pos2.x), y(pos2.y)
+ConsolePoint2D::ConsolePoint2D(const ConsolePoint2D& Position)
+	: x(Position.x), y(Position.y)
 {
 }
 
-ConsolePoint2D::ConsolePoint2D(const COORD& pos2)
-	: x(pos2.X), y(pos2.Y)
+ConsolePoint2D::ConsolePoint2D(const COORD& Position)
+	: x(Position.X), y(Position.Y)
 {
 }
 
-ConsolePoint2D::ConsolePoint2D(ConsolePoint2D&& pos2)
-	: x(pos2.x), y(pos2.y)
+ConsolePoint2D::ConsolePoint2D(ConsolePoint2D&& Position)
+	: x(Position.x), y(Position.y)
 {
-	pos2.~ConsolePoint2D();
+	Position.~ConsolePoint2D();
 }
 
 ConsolePoint2D::ConsolePoint2D(const int X, const int Y)
@@ -36,28 +37,28 @@ ConsolePoint2D::ConsolePoint2D(const int X, const int Y)
 {
 }
 
-const ConsolePoint2D& ConsolePoint2D::operator=(const ConsolePoint2D pos2)
+const ConsolePoint2D& ConsolePoint2D::operator=(const ConsolePoint2D Position)
 {
-	x = pos2.x;
-	y = pos2.y;
+	x = Position.x;
+	y = Position.y;
 	return*this;
 }
 
-const ConsolePoint2D& ConsolePoint2D::operator=(const COORD pos2)
+const ConsolePoint2D& ConsolePoint2D::operator=(const COORD Position)
 {
-	x = pos2.X;
-	y = pos2.Y;
+	x = Position.X;
+	y = Position.Y;
 	return*this;
 }
 
-const bool ConsolePoint2D::operator==(const ConsolePoint2D& pos2) const
+const bool ConsolePoint2D::operator==(const ConsolePoint2D& Position) const
 {
-	return x == pos2.x && y == pos2.y;
+	return x == Position.x && y == Position.y;
 }
 
-const bool ConsolePoint2D::operator!=(const ConsolePoint2D& pos2) const
+const bool ConsolePoint2D::operator!=(const ConsolePoint2D& Position) const
 {
-	return !operator==(pos2);
+	return !operator==(Position);
 }
 
 ConsolePoint2D::operator COORD() const
@@ -80,10 +81,10 @@ const bool ConsolePoint2D::exist() const
 	return x != -1 || y != -1;
 }
 
-void ConsolePoint2D::reSet(const ConsolePoint2D pos2)
+void ConsolePoint2D::reSet(const ConsolePoint2D Position)
 {
-	x = pos2.x;
-	y = pos2.y;
+	x = Position.x;
+	y = Position.y;
 }
 
 void ConsolePoint2D::reSet(const int X, const int Y)

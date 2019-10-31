@@ -1,5 +1,6 @@
 #include "ConsoleText.h"
 #include <iostream>
+using namespace ConsoleEngine;
 using namespace ConsoleController;
 
 ConsoleText::ConsoleText(const std::string Text)
@@ -17,31 +18,31 @@ ConsoleText::ConsoleText(const std::string Text, const int x, const int y)
 {
 }
 
-ConsoleText::ConsoleText(const ConsoleText& text2)
-	: ConsoleObject(text2)
-	, backColor(text2.backColor)
-	, foreColor(text2.foreColor)
-	, currentMode(text2.currentMode)
+ConsoleText::ConsoleText(const ConsoleText& Text)
+	: ConsoleObject(Text)
+	, backColor(Text.backColor)
+	, foreColor(Text.foreColor)
+	, currentMode(Text.currentMode)
 {
 }
 
-ConsoleText::ConsoleText(ConsoleText&& text2)
-	: ConsoleObject(text2)
-	, backColor(text2.backColor)
-	, foreColor(text2.foreColor)
-	, currentMode(text2.currentMode)
+ConsoleText::ConsoleText(ConsoleText&& Text)
+	: ConsoleObject(Text)
+	, backColor(Text.backColor)
+	, foreColor(Text.foreColor)
+	, currentMode(Text.currentMode)
 {
-	text2.~ConsoleText();
+	Text.~ConsoleText();
 }
 
-const ConsoleText& ConsoleText::operator=(const ConsoleText& text2)
+const ConsoleText& ConsoleText::operator=(const ConsoleText& Text)
 {
-	if (this == &text2)
+	if (this == &Text)
 		return*this;
-	ConsoleObject::operator=(text2);
-	backColor = text2.backColor;
-	foreColor = text2.foreColor;
-	currentMode = text2.currentMode;
+	ConsoleObject::operator=(Text);
+	backColor = Text.backColor;
+	foreColor = Text.foreColor;
+	currentMode = Text.currentMode;
 	return*this;
 }
 
@@ -55,19 +56,19 @@ const int ConsoleText::getForeColor() const
 	return foreColor;
 }
 
-const ConsoleText& ConsoleText::setBackColor(const int color2)
+ConsoleText& ConsoleText::setBackColor(const int Color)
 {
-	backColor = color2;
+	backColor = Color;
 	return*this;
 }
 
-const ConsoleText& ConsoleText::setForeColor(const int color2)
+ConsoleText& ConsoleText::setForeColor(const int Color)
 {
-	foreColor = color2;
+	foreColor = Color;
 	return*this;
 }
 
-const ConsoleText& ConsoleText::setRenderMode(const RenderMode newMode)
+ConsoleText& ConsoleText::setRenderMode(const RenderMode newMode)
 {
 	currentMode = newMode;
 	return*this;

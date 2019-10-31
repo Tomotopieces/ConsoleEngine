@@ -1,5 +1,6 @@
 #include "ConsoleCharacter.h"
 #include <iostream>
+using namespace ConsoleEngine;
 
 ConsoleCharacter::ConsoleCharacter(const char Character)
 	: ConsoleText("")
@@ -22,34 +23,34 @@ ConsoleCharacter::ConsoleCharacter(const char Character, const int x, const int 
 	text = character;
 }
 
-ConsoleCharacter::ConsoleCharacter(const ConsoleCharacter& character2)
-	: ConsoleText(character2)
-	, character(character2.character)
+ConsoleCharacter::ConsoleCharacter(const ConsoleCharacter& Character)
+	: ConsoleText(Character)
+	, character(Character.character)
 {
 	text = character;
 }
 
-ConsoleCharacter::ConsoleCharacter(ConsoleCharacter&& character2)
-	: ConsoleText(character2)
-	, character(character2.character)
+ConsoleCharacter::ConsoleCharacter(ConsoleCharacter&& Character)
+	: ConsoleText(Character)
+	, character(Character.character)
 {
 	text = character;
-	character2.~ConsoleCharacter();
+	Character.~ConsoleCharacter();
 }
 
-const ConsoleCharacter& ConsoleCharacter::operator=(const ConsoleCharacter& character2)
+const ConsoleCharacter& ConsoleCharacter::operator=(const ConsoleCharacter& Character)
 {
-	if (this == &character2)
+	if (this == &Character)
 		return*this;
 	text = character;
-	ConsoleText::operator=(character2);
-	character = character2.character;
+	ConsoleText::operator=(Character);
+	character = Character.character;
 	return*this;
 }
 
-const bool ConsoleCharacter::operator==(char character2) const
+const bool ConsoleCharacter::operator==(char Character) const
 {
-	return character == character2;
+	return character == Character;
 }
 
 ConsoleCharacter::operator char() const

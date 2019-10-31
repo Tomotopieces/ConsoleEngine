@@ -11,15 +11,10 @@
 //****************************************
 
 namespace  ConsoleController {
-
-	//****************************************
-	//****************************************
+	//蓝，绿，红，加亮
+	enum ConsoleColor { black = 0, blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
 
 	class CONSOLECONTROLLER_API MOUSE {
-	private:
-		static HANDLE handle;
-		static DWORD numRead;
-		static INPUT_RECORD inrc;
 	public:
 		MOUSE();
 
@@ -32,17 +27,9 @@ namespace  ConsoleController {
 		/* 左右键同时按下 */
 		static bool bothDown();
 	};
-
 	CONSOLECONTROLLER_API extern MOUSE Mouse;
 
-	//****************************************
-	//****************************************
-
 	class CONSOLECONTROLLER_API CURSOR {
-	private:
-		static HANDLE handle;
-		static CONSOLE_CURSOR_INFO CursorInfo;
-		static COORD coord;
 	public:
 		CURSOR();
 
@@ -55,24 +42,14 @@ namespace  ConsoleController {
 		/* 设置光标位置(COORD) */
 		static bool setPosition(COORD pos);
 	};
-
 	CONSOLECONTROLLER_API extern CURSOR Cursor;
 
-	//****************************************
-	//****************************************
-
 	class CONSOLECONTROLLER_API SCREEN {
-	private:
-		static HANDLE handle;
-		static CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
-		static SMALL_RECT rect;
-		static COORD coord;
 	public:
 		SCREEN();
 
 		/* 获取窗口尺寸 */
 		static const COORD getSize();
-
 		/* 设置标题 */
 		static bool setTitle(const char* str);
 		/* 隐藏滚动条 */
@@ -83,22 +60,15 @@ namespace  ConsoleController {
 		static bool window();
 		/* 设置窗口尺寸 */
 		static bool setSize(short width, short height);
+		/* 设置背景颜色 */
+		static bool setBackgroundColor(ConsoleColor color);
+		static bool setBackgroundColor(int color);
 		/* 清空窗口区域 */
 		static bool clean();
 	};
-
-	//****************************************
-	//****************************************
-
 	CONSOLECONTROLLER_API extern SCREEN Screen;
 
-	//蓝，绿，红，加亮
-	enum ConsoleColor { black = 0, blue = 1, green = 2, cyan = 3, red = 4, purple = 5, yellow = 6, white = 7, light = 8 };
-
 	class CONSOLECONTROLLER_API CHARACTER {
-	private:
-		static HANDLE handle;
-		static int currentColor;
 	public:
 		CHARACTER();
 
@@ -109,9 +79,5 @@ namespace  ConsoleController {
 		static bool setBackColor(ConsoleColor color);
 		static bool setBackColor(int color);
 	};
-
 	CONSOLECONTROLLER_API extern CHARACTER Character;
-
-	//****************************************
-	//****************************************
 }

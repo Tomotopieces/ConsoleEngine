@@ -2,20 +2,25 @@
 #include "ConsoleObject.h"
 #include <vector>
 
-class ConsoleScene	//控制台场景
-	:private ConsoleObject
+namespace ConsoleEngine
 {
-private:
-	std::vector<ConsoleObject*> objectList;	//场景由物体构成
+	class ConsoleScene
+		:private ConsoleObject
+	{
+	private:
+		std::vector<ConsoleObject*> objectList;
 
-public:
-	ConsoleScene();
-	ConsoleScene(ConsoleScene& scene2);
-	ConsoleScene(ConsoleScene&& scene2);
-	const ConsoleScene& operator=(const ConsoleScene& scene2);
+	public:
+		ConsoleScene();
+		ConsoleScene(ConsoleScene& Scene);
+		ConsoleScene(ConsoleScene&& Scene);
+		const ConsoleScene& operator=(const ConsoleScene& Scene);
 
-	ConsoleScene& addObject(ConsoleObject* newObject);
+		//	add
+		ConsoleScene& addObject(ConsoleObject* newObject);
 
-	const ConsoleScene& updateState();
-	const ConsoleScene& render()const;
-};
+		//	others
+		const ConsoleScene& updateState();
+		const ConsoleScene& render()const;
+	};
+}

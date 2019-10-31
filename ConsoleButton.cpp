@@ -1,5 +1,5 @@
 #include "ConsoleButton.h"
-using namespace ConsoleController;
+using namespace ConsoleEngine;
 
 ConsoleButton::ConsoleButton(const std::string Text)
 	: ConsoleObject(Text)
@@ -93,73 +93,73 @@ const bool ConsoleButton::CatchMouse()
 	return catchMouse;
 }
 
-const ConsoleButton& ConsoleButton::setDefaultBackColor(int color2)
+ConsoleButton& ConsoleButton::setDefaultBackColor(int Color)
 {
-	defaultBackColor = color2;
+	defaultBackColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setDefaultForeColor(int color2)
+ConsoleButton& ConsoleButton::setDefaultForeColor(int Color)
 {
-	defaultForeColor = color2;
+	defaultForeColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setInactiveBackColor(int color2)
+ConsoleButton& ConsoleButton::setInactiveBackColor(int Color)
 {
-	inactiveBackColor = color2;
+	inactiveBackColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setInactiveForeColor(int color2)
+ConsoleButton& ConsoleButton::setInactiveForeColor(int Color)
 {
-	inactiveForeColor = color2;
+	inactiveForeColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setActiveBackColor(int color2)
+ConsoleButton& ConsoleButton::setActiveBackColor(int Color)
 {
-	activeBackColor = color2;
+	activeBackColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setActiveForeColor(int color2)
+ConsoleButton& ConsoleButton::setActiveForeColor(int Color)
 {
-	activeForeColor = color2;
+	activeForeColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setUnavailableDefaultBackColor(int color2)
+ConsoleButton& ConsoleButton::setUnavailableDefaultBackColor(int Color)
 {
-	unavailableDefaultBackColor = color2;
+	unavailableDefaultBackColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setUnavailableDefaultForeColor(int color2)
+ConsoleButton& ConsoleButton::setUnavailableDefaultForeColor(int Color)
 {
-	unavailableDefaultForeColor = color2;
+	unavailableDefaultForeColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setUnavailableInactiveBackColor(int color2)
+ConsoleButton& ConsoleButton::setUnavailableInactiveBackColor(int Color)
 {
-	unavailableInactiveBackColor = color2;
+	unavailableInactiveBackColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setUnavailableInactiveForeColor(int color2)
+ConsoleButton& ConsoleButton::setUnavailableInactiveForeColor(int Color)
 {
-	unavailableInactiveForeColor = color2;
+	unavailableInactiveForeColor = Color;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setAvailable(const bool Usable)
+ConsoleButton& ConsoleButton::setAvailable(const bool Usable)
 {
 	available = Usable;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::setActivateFunction(void(*ActivateFunction)())
+ConsoleButton& ConsoleButton::setActivateFunction(void(*ActivateFunction)())
 {
 	activateFunction = ActivateFunction;
 	return*this;

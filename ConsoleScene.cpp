@@ -1,31 +1,33 @@
 #include "ConsoleScene.h"
 #include "ConsoleButton.h"
 #include "ConsoleText.h"
+using namespace ConsoleEngine;
+using namespace ConsoleController;
 
 ConsoleScene::ConsoleScene()
 	: ConsoleObject("")
 {
 }
 
-ConsoleScene::ConsoleScene(ConsoleScene& scene2)
+ConsoleScene::ConsoleScene(ConsoleScene& Scene)
 	: ConsoleObject("")
-	, objectList(scene2.objectList)
+	, objectList(Scene.objectList)
 {
 }
 
-ConsoleScene::ConsoleScene(ConsoleScene&& scene2)
+ConsoleScene::ConsoleScene(ConsoleScene&& Scene)
 	: ConsoleObject("")
-	, objectList(scene2.objectList)
+	, objectList(Scene.objectList)
 {
-	scene2.~ConsoleScene();
+	Scene.~ConsoleScene();
 }
 
-const ConsoleScene& ConsoleScene::operator=(const ConsoleScene& scene2)
+const ConsoleScene& ConsoleScene::operator=(const ConsoleScene& Scene)
 {
-	if(this == &scene2)
+	if(this == &Scene)
 		return*this;
-	ConsoleObject::operator=(scene2);
-	objectList = scene2.objectList;
+	ConsoleObject::operator=(Scene);
+	objectList = Scene.objectList;
 	return*this;
 }
 
