@@ -10,7 +10,7 @@ ConsoleController请参见我的这个版本库：[ConsoleController](https://gi
       ├class Screen                   //窗口
       └class Character                //字符（调整打印颜色）
     namespace ConsoleEngine
-      ├class ConsoleObject            //物品
+      ├class ConsoleObject            //物品（主要的基类
         ├class ConsoleText            //文本
           └class ConsoleCharacter     //字符
         ├class ConsoleImage           //图片（由字符构成）
