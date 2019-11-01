@@ -1,0 +1,10 @@
+#pragma once
+#include "ConsoleController.h"
+#include "ConsoleObject.h"
+#include "ConsoleText.h"
+#include "ConsoleButton.h"
+#include "ConsoleCharacter.h"
+#include "ConsoleImage.h"
+#include "ConsoleSprite.h"
+#include "ConsoleScene.h"
+#include "ConsoleMap.h"

@@ -1,19 +1,19 @@
 #include "ConsoleSprite.h"
 using namespace ConsoleEngine;
 
-ConsoleEngine::ConsoleSprite::ConsoleSprite(const std::vector<std::string> Image)
+ConsoleEngine::ConsoleSprite::ConsoleSprite(const RawImage& Image)
 	: ConsoleObject("")
 	, image(Image)
 {
 }
 
-ConsoleEngine::ConsoleSprite::ConsoleSprite(const std::vector<std::string> Image, const ConsolePoint2D Position)
+ConsoleEngine::ConsoleSprite::ConsoleSprite(const RawImage& Image, const ConsolePoint2D& Position)
 	: ConsoleObject("", Position)
 	, image(Image)
 {
 }
 
-ConsoleEngine::ConsoleSprite::ConsoleSprite(const std::vector<std::string> Image, const int x, const int y)
+ConsoleEngine::ConsoleSprite::ConsoleSprite(const RawImage& Image, const int x, const int y)
 	: ConsoleObject("", x, y)
 	, image(Image)
 {
@@ -30,6 +30,13 @@ ConsoleEngine::ConsoleSprite::ConsoleSprite(ConsoleImage&& Image)
 	, image(Image)
 {
 	Image.~ConsoleImage();
+}
+
+const ConsoleSprite& ConsoleEngine::ConsoleSprite::operator=(const ConsoleImage& Image)
+{	// do not change "isTrigger" and "collider"
+	ConsoleObject::operator=(Image);
+	image = Image;
+	return*this;
 }
 
 ConsoleEngine::ConsoleSprite::ConsoleSprite(const ConsoleSprite& Sprite)

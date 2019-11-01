@@ -11,9 +11,9 @@ namespace ConsoleEngine
 	protected:
 		std::string text;
 		ConsolePoint2D position = { 0,0 };
-
 		explicit ConsoleObject();
 	public:
+		//	constructor
 		ConsoleObject(const std::string Text);
 		ConsoleObject(const std::string Text, const ConsolePoint2D Position);
 		ConsoleObject(const std::string Text, const int x, const int y);

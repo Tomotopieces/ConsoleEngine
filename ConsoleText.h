@@ -20,6 +20,7 @@ namespace ConsoleEngine
 	private:
 		explicit ConsoleText();
 	public:
+		//	constructor
 		ConsoleText(const std::string Text);
 		ConsoleText(const std::string Text, const ConsolePoint2D Position);
 		ConsoleText(const std::string Text, const int x, const int y);

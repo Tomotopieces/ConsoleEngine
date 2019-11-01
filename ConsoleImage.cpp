@@ -3,8 +3,7 @@
 using namespace ConsoleEngine;
 using namespace ConsoleController;
 
-ConsoleImage::ConsoleImage(const std::vector<std::string> rawImage)
-	: ConsoleObject("")
+const void ConsoleEngine::ConsoleImage::copyFromRawImage(const RawImage& rawImage)
 {
 	image.resize(rawImage.size());
 	for (int row = 0; row < rawImage.size(); ++row) {
@@ -14,16 +13,22 @@ ConsoleImage::ConsoleImage(const std::vector<std::string> rawImage)
 	}
 }
 
-ConsoleEngine::ConsoleImage::ConsoleImage(const std::vector<std::string> rawImage, const ConsolePoint2D Position)
-	: ConsoleObject("", Position)
+ConsoleImage::ConsoleImage(const RawImage& rawImage)
+	: ConsoleObject("")
 {
-	ConsoleImage(rawImage);
+	copyFromRawImage(rawImage);
 }
 
-ConsoleEngine::ConsoleImage::ConsoleImage(const std::vector<std::string> rawImage, const int x, const int y)
+ConsoleEngine::ConsoleImage::ConsoleImage(const RawImage& rawImage, const ConsolePoint2D Position)
+	: ConsoleObject("", Position)
+{
+	copyFromRawImage(rawImage);
+}
+
+ConsoleEngine::ConsoleImage::ConsoleImage(const RawImage& rawImage, const int x, const int y)
 	: ConsoleObject("", x, y)
 {
-	ConsoleImage(rawImage);
+	copyFromRawImage(rawImage);
 }
 
 ConsoleImage::ConsoleImage(const ConsoleImage& Image)
@@ -37,6 +42,12 @@ ConsoleImage::ConsoleImage(ConsoleImage&& Image)
 	, image(Image.image)
 {
 	Image.~ConsoleImage();
+}
+
+const ConsoleImage& ConsoleEngine::ConsoleImage::operator=(const RawImage& rawImage)
+{
+	copyFromRawImage(rawImage);
+	return*this;
 }
 
 const ConsoleImage& ConsoleImage::operator=(const ConsoleImage& Image)

@@ -6,6 +6,7 @@
 
 namespace ConsoleEngine
 {
+	// random function	(set random seed once)
 	int Rand();
 
 	class ConsolePoint2D
@@ -14,6 +15,7 @@ namespace ConsoleEngine
 		int x;
 		int y;
 	public:
+		//	constructor
 		ConsolePoint2D();
 		ConsolePoint2D(const ConsolePoint2D& Position);
 		ConsolePoint2D(const COORD& Position);
@@ -21,8 +23,12 @@ namespace ConsoleEngine
 		ConsolePoint2D(const int X, const int Y);
 		const ConsolePoint2D& operator=(const ConsolePoint2D Position);
 		const ConsolePoint2D& operator=(const COORD Position);
+
+		//	equal operator
 		const bool operator==(const ConsolePoint2D& Position)const;
 		const bool operator!=(const ConsolePoint2D& Position)const;
+
+		//	transform
 		operator COORD()const;
 
 		//	get
@@ -30,11 +36,13 @@ namespace ConsoleEngine
 		const int getY()const;
 
 		//	set
-		const bool exist()const;
 		void reSet(const ConsolePoint2D Position);
 		void reSet(const int X, const int Y);
 		void randomSet(const int MaxWidth, const int MaxHeight);
 		void randomSet(const int Top, const int Bottom, const int Left, const int Right);
+
+		//	others
+		const bool exist()const;
 	};
 
 	//****************************************

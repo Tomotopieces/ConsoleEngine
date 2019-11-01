@@ -11,6 +11,7 @@ namespace ConsoleEngine
 		char character = ' ';
 		explicit ConsoleCharacter();
 	public:
+		//	constructor
 		ConsoleCharacter(const char Character);
 		ConsoleCharacter(const char Character, const ConsolePoint2D& Position);
 		ConsoleCharacter(const char Character, const int x, const int y);

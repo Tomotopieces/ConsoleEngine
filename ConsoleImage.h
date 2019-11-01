@@ -7,18 +7,27 @@
 namespace ConsoleEngine
 {
 	using namespace ConsoleController;
+
+	typedef std::vector<std::string> RawImage;	//	RawImage is a vector of string.
+
 	class ConsoleImage
 		: public ConsoleObject
 	{
 	private:
 		std::vector<std::vector<ConsoleCharacter>> image;
+
+		//	others
+		const void copyFromRawImage(const RawImage& rawImage);
+
 		explicit ConsoleImage();
 	public:
-		ConsoleImage(const std::vector<std::string> rawImage);
-		ConsoleImage(const std::vector<std::string> rawImage, const ConsolePoint2D Position);
-		ConsoleImage(const std::vector<std::string> rawImage, const int x, const int y);
+		//	constructor
+		ConsoleImage(const RawImage& rawImage);
+		ConsoleImage(const RawImage& rawImage, const ConsolePoint2D Position);
+		ConsoleImage(const RawImage& rawImage, const int x, const int y);
 		ConsoleImage(const ConsoleImage& Image);
 		ConsoleImage(ConsoleImage&& Image);
+		const ConsoleImage& operator=(const RawImage& rawImage);
 		const ConsoleImage& operator=(const ConsoleImage& Image);
 
 		//	get

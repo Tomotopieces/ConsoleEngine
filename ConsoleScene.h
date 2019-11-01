@@ -11,6 +11,7 @@ namespace ConsoleEngine
 		std::vector<ConsoleObject*> objectList;
 
 	public:
+		//	constructor
 		ConsoleScene();
 		ConsoleScene(ConsoleScene& Scene);
 		ConsoleScene(ConsoleScene&& Scene);

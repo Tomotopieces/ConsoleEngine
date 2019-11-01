@@ -21,14 +21,16 @@ namespace ConsoleEngine
 		explicit ConsoleSprite();
 	public:
 		//	construct by rawImage
-		ConsoleSprite(const std::vector<std::string> Image);
-		ConsoleSprite(const std::vector<std::string> Image, const ConsolePoint2D Position);
-		ConsoleSprite(const std::vector<std::string> Image, const int x, const int y);
+		ConsoleSprite(const RawImage& Image);
+		ConsoleSprite(const RawImage& Image, const ConsolePoint2D& Position);
+		ConsoleSprite(const RawImage& Image, const int x, const int y);
 
 		//	construct by ConsoleImage
 		ConsoleSprite(const ConsoleImage& Image);
 		ConsoleSprite(ConsoleImage&& Image);
+		const ConsoleSprite& operator=(const ConsoleImage& Image);
 
+		//	construct by other Sprite
 		ConsoleSprite(const ConsoleSprite& Sprite);
 		ConsoleSprite(ConsoleSprite&& Sprite);
 		const ConsoleSprite& operator=(const ConsoleSprite& Sprite);
