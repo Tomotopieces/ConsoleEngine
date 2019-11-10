@@ -53,6 +53,12 @@ const ConsoleObject& ConsoleObject::operator=(const ConsoleObject& object2)
 	return*this;
 }
 
+ConsoleObject* ConsoleEngine::ConsoleObject::getClone() const
+{
+	ConsoleObject* temp = new ConsoleObject(*this);
+	return temp;
+}
+
 const std::string ConsoleObject::getText() const
 {
 	return text;

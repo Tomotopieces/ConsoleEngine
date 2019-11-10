@@ -7,6 +7,7 @@ namespace ConsoleEngine
 	using namespace ConsoleController;
 	class ConsoleButton
 		: public ConsoleObject
+		, private ObjectInterface
 	{
 	private:
 		//	color
@@ -42,6 +43,9 @@ namespace ConsoleEngine
 		ConsoleButton(const ConsoleButton& option2);
 		ConsoleButton(ConsoleButton&& option2);
 		const ConsoleButton& operator=(const ConsoleButton& option2);
+
+		//	get
+		ConsoleButton* getClone()const override;
 
 		//	set color
 		ConsoleButton& setDefaultBackColor(int Color);

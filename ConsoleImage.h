@@ -12,6 +12,7 @@ namespace ConsoleEngine
 
 	class ConsoleImage
 		: public ConsoleObject
+		, private ObjectInterface
 	{
 	private:
 		std::vector<std::vector<ConsoleCharacter>> image;
@@ -26,11 +27,14 @@ namespace ConsoleEngine
 		ConsoleImage(const RawImage& rawImage, const ConsolePoint2D Position);
 		ConsoleImage(const RawImage& rawImage, const int x, const int y);
 		ConsoleImage(const ConsoleImage& Image);
+		ConsoleImage(const ConsoleImage& Image, const ConsolePoint2D Position);
+		ConsoleImage(const ConsoleImage& Image, const int x, const int y);
 		ConsoleImage(ConsoleImage&& Image);
 		const ConsoleImage& operator=(const RawImage& rawImage);
 		const ConsoleImage& operator=(const ConsoleImage& Image);
 
 		//	get
+		ConsoleImage* getClone()const override;
 		const int getBackColor(const ConsolePoint2D characterPosition)const;
 		const int getBackColor(const int x, const int y)const;
 		const int getForeColor(const ConsolePoint2D characterPosition)const;

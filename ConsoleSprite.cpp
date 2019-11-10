@@ -65,6 +65,12 @@ const ConsoleSprite& ConsoleEngine::ConsoleSprite::operator=(const ConsoleSprite
 	return*this;
 }
 
+ConsoleSprite* ConsoleEngine::ConsoleSprite::getClone() const
+{
+	ConsoleSprite* clone = new ConsoleSprite(*this);
+	return clone;
+}
+
 const ConsoleImage& ConsoleEngine::ConsoleSprite::getImage() const
 {
 	return image;

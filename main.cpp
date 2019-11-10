@@ -1,35 +1,48 @@
-#include "ConsoleEngineHeader.h"
+#include "ConsoleEngine.h"
 #include <string>
 using namespace ConsoleEngine;
-using namespace ConsoleController;
 
 int main() {
-	Screen.setTitle("Game Test");
-	Screen.setSize(64, 32);
+	Screen.setTitle("Title");
+	Screen.setSize(128, 36);
 	Screen.hideScrollBar();
-	auto temp = Screen.setBackgroundColor(blue);
+	auto temp = Screen.setBackgroundColor(light);
 	Screen.clean();
 	Cursor.hide();
 
 	ConsoleScene cScene;
 
-	ConsoleText cText("Game Play");
-	cText.setPosition(0, 2);
-	cText.setBackColor(blue);
-	cText.setForeColor(white + light);
-	cText.setRenderMode(HorizontallyCentered);
-	cScene.addObject(&cText);
-
-	std::vector<std::string> image =
+	/*
+	//http://patorjk.com/software/taag/#p=display&f=Big&t=Sky%20Fighter
+	RawImage title =
 	{
-		"$$I$$",
-		"$o$o$",
-		"YYYYY"
+		"                                                        ",
+		"   _____ _            ______ _       _     _            ",
+		"  / ____| |          |  ____(_)     | |   | |           ",
+		" | (___ | | ___   _  | |__   _  __ _| |__ | |_ ___ _ __ ",
+		"  \\___ \\| |/ / | | | |  __| | |/ _` | '_ \\| __/ _ \\ '__|",
+		"  ____) |   <| |_| | | |    | | (_| | | | | ||  __/ |   ",
+		" |_____/|_|\\_\\\\__, | |_|    |_|\\__, |_| |_|\\__\\___|_|   ",
+		"               __/ |            __/ |                   ",
+		"              |___/            |___/                    ",
+		"                                                        "
 	};
-	ConsoleImage cImage(image);
-	cImage.setAllColor(blue, cyan + light);
-	cImage.setPosition(29, 20);
-	cScene.addObject(&cImage);
+	ConsoleImage cTitle(title, 36, 8);
+	cTitle.setAllColor(white, black);
+	cScene.addObject(&cTitle);
+	*/
+
+	RawImage enemyImage=
+	{
+		"\\ /",
+		" T ",
+		" V "
+	};
+	ConsoleImage enemy(enemyImage);
+	enemy.setAllColor(light, black);
+	cScene.addObject(enemy, 10, 10);
+	cScene.addObject(enemy, 20, 10);
+	cScene.addObject(enemy, 30, 10);
 
 	while (true)
 		cScene.updateState().render();

@@ -46,6 +46,12 @@ const ConsoleText& ConsoleText::operator=(const ConsoleText& Text)
 	return*this;
 }
 
+ConsoleText* ConsoleEngine::ConsoleText::getClone() const
+{
+	ConsoleText* clone = new ConsoleText(*this);
+	return clone;
+}
+
 const int ConsoleText::getBackColor() const
 {
 	return backColor;

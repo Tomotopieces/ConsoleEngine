@@ -7,6 +7,7 @@ namespace ConsoleEngine
 {
 	class ConsoleSprite
 		: public ConsoleObject
+		, private ObjectInterface
 	{
 	private:
 		ConsoleImage image;
@@ -36,6 +37,7 @@ namespace ConsoleEngine
 		const ConsoleSprite& operator=(const ConsoleSprite& Sprite);
 
 		//	get
+		ConsoleSprite* getClone()const override;
 		const ConsoleImage& getImage()const;
 		const bool getIsTrigger()const;
 		const int getColliderWidth()const;

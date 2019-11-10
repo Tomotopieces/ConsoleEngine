@@ -58,6 +58,12 @@ ConsoleCharacter::operator char() const
 	return character;
 }
 
+ConsoleCharacter* ConsoleEngine::ConsoleCharacter::getClone() const
+{
+	ConsoleCharacter* clone = new ConsoleCharacter(*this);
+	return clone;
+}
+
 const char& ConsoleCharacter::getCharacter() const
 {
 	return character;

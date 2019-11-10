@@ -12,6 +12,7 @@ namespace ConsoleEngine
 
 	class ConsoleText
 		: public ConsoleObject
+		, private ObjectInterface
 	{
 	protected:
 		int backColor = black;
@@ -29,6 +30,7 @@ namespace ConsoleEngine
 		virtual const ConsoleText& operator=(const ConsoleText& Text);
 
 		//	get
+		ConsoleText* getClone()const override;
 		const int getBackColor()const;
 		const int getForeColor()const;
 

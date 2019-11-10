@@ -37,6 +37,20 @@ ConsoleImage::ConsoleImage(const ConsoleImage& Image)
 {
 }
 
+ConsoleEngine::ConsoleImage::ConsoleImage(const ConsoleImage& Image, const ConsolePoint2D Position)
+	: ConsoleObject("")
+	, image(Image.image)
+{
+	setPosition(Position);
+}
+
+ConsoleEngine::ConsoleImage::ConsoleImage(const ConsoleImage& Image, const int x, const int y)
+	: ConsoleObject("")
+	, image(Image.image)
+{
+	setPosition(x, y);
+}
+
 ConsoleImage::ConsoleImage(ConsoleImage&& Image)
 	: ConsoleObject("")
 	, image(Image.image)
@@ -57,6 +71,12 @@ const ConsoleImage& ConsoleImage::operator=(const ConsoleImage& Image)
 	ConsoleObject::operator=(Image);
 	image = Image.image;
 	return*this;
+}
+
+ConsoleImage* ConsoleEngine::ConsoleImage::getClone() const
+{
+	ConsoleImage* clone = new ConsoleImage(*this);
+	return clone;
 }
 
 const int ConsoleImage::getBackColor(const ConsolePoint2D characterPosition)const

@@ -87,6 +87,12 @@ const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 	return*this;
 }
 
+ConsoleButton* ConsoleEngine::ConsoleButton::getClone() const
+{
+	ConsoleButton* clone = new ConsoleButton(*this);
+	return clone;
+}
+
 const bool ConsoleButton::CatchMouse()
 {
 	catchMouse = (Mouse.getPosition().Y == position.getY() && Mouse.getPosition().X >= position.getX() && Mouse.getPosition().X <= (position.getX() + text.length()));

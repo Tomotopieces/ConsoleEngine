@@ -6,7 +6,16 @@
 
 namespace ConsoleEngine
 {
+	class ConsoleObject;
+
+	class ObjectInterface
+	{
+	public:
+		virtual ConsoleObject* getClone()const = 0;
+	};
+
 	class ConsoleObject
+		: private ObjectInterface
 	{
 	protected:
 		std::string text;
@@ -22,6 +31,7 @@ namespace ConsoleEngine
 		virtual const ConsoleObject& operator=(const ConsoleObject& object2);
 
 		//	get
+		ConsoleObject* getClone()const override;
 		const std::string getText()const;
 		const ConsolePoint2D getPosition()const;
 
