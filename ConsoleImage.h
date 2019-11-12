@@ -12,7 +12,6 @@ namespace ConsoleEngine
 
 	class ConsoleImage
 		: public ConsoleObject
-		, private ObjectInterface
 	{
 	private:
 		std::vector<std::vector<ConsoleCharacter>> image;
@@ -34,22 +33,22 @@ namespace ConsoleEngine
 		const ConsoleImage& operator=(const ConsoleImage& Image);
 
 		//	get
-		ConsoleImage* getClone()const override;
-		const int getBackColor(const ConsolePoint2D characterPosition)const;
-		const int getBackColor(const int x, const int y)const;
-		const int getForeColor(const ConsolePoint2D characterPosition)const;
-		const int getForeColor(const int x, const int y)const;
+		virtual ConsoleImage* GetClone()const override;
+		const int GetBackColor(const ConsolePoint2D characterPosition)const;
+		const int GetBackColor(const int x, const int y)const;
+		const int GetForeColor(const ConsolePoint2D characterPosition)const;
+		const int GetForeColor(const int x, const int y)const;
 
 		//	set
-		ConsoleImage& setCharacter(const ConsolePoint2D characterPosition, const char newcharacter);
-		ConsoleImage& setCharacter(const int x, const int y, const char newcharacter);
-		ConsoleImage& setColor(const ConsolePoint2D characterPosition, const int newBackColor, const int newForeColor);
-		ConsoleImage& setColor(const int x, const int y, const int newBackColor, const int newForeColor);
-		ConsoleImage& setAllColor(const int newBackColor, const int newForeColor);
+		ConsoleImage& SetCharacter(const ConsolePoint2D characterPosition, const char newcharacter);
+		ConsoleImage& SetCharacter(const int x, const int y, const char newcharacter);
+		ConsoleImage& SetColor(const ConsolePoint2D characterPosition, const int newBackColor, const int newForeColor);
+		ConsoleImage& SetColor(const int x, const int y, const int newBackColor, const int newForeColor);
+		ConsoleImage& SetAllColor(const int newBackColor, const int newForeColor);
 
 		//	others
-		virtual const ConsoleImage& render()const;
-		const ConsoleImage& render(const ConsolePoint2D startPosition)const;
-		const ConsoleImage& render(const int x, int y)const;
+		virtual const ConsoleImage& Render()const override;
+		const ConsoleImage& Render(const ConsolePoint2D startPosition)const;
+		const ConsoleImage& Render(const int x, int y)const;
 	};
 }

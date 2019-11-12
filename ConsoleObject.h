@@ -8,14 +8,7 @@ namespace ConsoleEngine
 {
 	class ConsoleObject;
 
-	class ObjectInterface
-	{
-	public:
-		virtual ConsoleObject* getClone()const = 0;
-	};
-
 	class ConsoleObject
-		: private ObjectInterface
 	{
 	protected:
 		std::string text;
@@ -31,16 +24,16 @@ namespace ConsoleEngine
 		virtual const ConsoleObject& operator=(const ConsoleObject& object2);
 
 		//	get
-		ConsoleObject* getClone()const override;
-		const std::string getText()const;
-		const ConsolePoint2D getPosition()const;
+		virtual ConsoleObject* GetClone()const;
+		const std::string GetText()const;
+		const ConsolePoint2D GetPosition()const;
 
 		//	set
-		ConsoleObject& setText(const std::string Text);
-		ConsoleObject& setPosition(const ConsolePoint2D position2);
-		ConsoleObject& setPosition(const int x, const int y);
+		ConsoleObject& SetText(const std::string Text);
+		ConsoleObject& SetPosition(const ConsolePoint2D position2);
+		ConsoleObject& SetPosition(const int x, const int y);
 
 		//	others
-		virtual const ConsoleObject& render()const;
+		virtual const ConsoleObject& Render()const;
 	};
 }

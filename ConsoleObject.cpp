@@ -53,43 +53,43 @@ const ConsoleObject& ConsoleObject::operator=(const ConsoleObject& object2)
 	return*this;
 }
 
-ConsoleObject* ConsoleEngine::ConsoleObject::getClone() const
+ConsoleObject* ConsoleEngine::ConsoleObject::GetClone() const
 {
 	ConsoleObject* temp = new ConsoleObject(*this);
 	return temp;
 }
 
-const std::string ConsoleObject::getText() const
+const std::string ConsoleObject::GetText() const
 {
 	return text;
 }
 
-const ConsolePoint2D ConsoleObject::getPosition() const
+const ConsolePoint2D ConsoleObject::GetPosition() const
 {
 	return position;
 }
 
-ConsoleObject& ConsoleObject::setText(const std::string Text)
+ConsoleObject& ConsoleObject::SetText(const std::string Text)
 {
 	text = Text;
 	return*this;
 }
 
-ConsoleObject& ConsoleObject::setPosition(const ConsolePoint2D position2)
+ConsoleObject& ConsoleObject::SetPosition(const ConsolePoint2D position2)
 {
 	position = position2;
 	return*this;
 }
 
-ConsoleObject& ConsoleObject::setPosition(const int x, const int y)
+ConsoleObject& ConsoleObject::SetPosition(const int x, const int y)
 {
 	position = ConsolePoint2D(x, y);
 	return*this;
 }
 
-const ConsoleObject& ConsoleObject::render() const
+const ConsoleObject& ConsoleObject::Render() const
 {
-	Cursor.setPosition(position);
+	Cursor.SetPosition(position);
 	std::cout << text;
 	return*this;
 }

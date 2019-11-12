@@ -87,7 +87,7 @@ const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 	return*this;
 }
 
-ConsoleButton* ConsoleEngine::ConsoleButton::getClone() const
+ConsoleButton* ConsoleEngine::ConsoleButton::GetClone() const
 {
 	ConsoleButton* clone = new ConsoleButton(*this);
 	return clone;
@@ -95,91 +95,91 @@ ConsoleButton* ConsoleEngine::ConsoleButton::getClone() const
 
 const bool ConsoleButton::CatchMouse()
 {
-	catchMouse = (Mouse.getPosition().Y == position.getY() && Mouse.getPosition().X >= position.getX() && Mouse.getPosition().X <= (position.getX() + text.length()));
+	catchMouse = (Mouse.GetPosition().Y == position.GetY() && Mouse.GetPosition().X >= position.GetX() && Mouse.GetPosition().X <= (position.GetX() + text.length()));
 	return catchMouse;
 }
 
-ConsoleButton& ConsoleButton::setDefaultBackColor(int Color)
+ConsoleButton& ConsoleButton::SetDefaultBackColor(int Color)
 {
 	defaultBackColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setDefaultForeColor(int Color)
+ConsoleButton& ConsoleButton::SetDefaultForeColor(int Color)
 {
 	defaultForeColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setInactiveBackColor(int Color)
+ConsoleButton& ConsoleButton::SetInactiveBackColor(int Color)
 {
 	inactiveBackColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setInactiveForeColor(int Color)
+ConsoleButton& ConsoleButton::SetInactiveForeColor(int Color)
 {
 	inactiveForeColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setActiveBackColor(int Color)
+ConsoleButton& ConsoleButton::SetActiveBackColor(int Color)
 {
 	activeBackColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setActiveForeColor(int Color)
+ConsoleButton& ConsoleButton::SetActiveForeColor(int Color)
 {
 	activeForeColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setUnavailableDefaultBackColor(int Color)
+ConsoleButton& ConsoleButton::SetUnavailableDefaultBackColor(int Color)
 {
 	unavailableDefaultBackColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setUnavailableDefaultForeColor(int Color)
+ConsoleButton& ConsoleButton::SetUnavailableDefaultForeColor(int Color)
 {
 	unavailableDefaultForeColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setUnavailableInactiveBackColor(int Color)
+ConsoleButton& ConsoleButton::SetUnavailableInactiveBackColor(int Color)
 {
 	unavailableInactiveBackColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setUnavailableInactiveForeColor(int Color)
+ConsoleButton& ConsoleButton::SetUnavailableInactiveForeColor(int Color)
 {
 	unavailableInactiveForeColor = Color;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setAvailable(const bool Usable)
+ConsoleButton& ConsoleButton::SetAvailable(const bool Usable)
 {
 	available = Usable;
 	return*this;
 }
 
-ConsoleButton& ConsoleButton::setActivateFunction(void(*ActivateFunction)())
+ConsoleButton& ConsoleButton::SetActivateFunction(void(*ActivateFunction)())
 {
 	activateFunction = ActivateFunction;
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::updateState()
+const ConsoleButton& ConsoleButton::UpdateState()
 {
-	if (catchMouse && Mouse.leftDown() && !active) {
+	if (catchMouse && Mouse.GetLeftDown() && !active) {
 		if (available) {
 			active = true;
 			activateFunction();
 		}
 	}
-	else if(!catchMouse || !Mouse.leftDown())
+	else if(!catchMouse || !Mouse.GetLeftDown())
 		active = false;
 
 	CatchMouse();
@@ -187,7 +187,7 @@ const ConsoleButton& ConsoleButton::updateState()
 	return*this;
 }
 
-const ConsoleButton& ConsoleButton::render() const
+const ConsoleButton& ConsoleButton::Render() const
 {
 	int currentBackColor;
 	int currentForeColor;
@@ -218,8 +218,8 @@ const ConsoleButton& ConsoleButton::render() const
 		}
 	}
 
-	Character.setBackColor(currentBackColor);
-	Character.setForeColor(currentForeColor);
-	ConsoleObject::render();
+	Character.SetBackColor(currentBackColor);
+	Character.SetForeColor(currentForeColor);
+	ConsoleObject::Render();
 	return*this;
 }

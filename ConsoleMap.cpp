@@ -66,12 +66,12 @@ ConsolePoint2D::operator COORD() const
 	return { short(x),short(y) };
 }
 
-const int ConsolePoint2D::getX() const
+const int ConsolePoint2D::GetX() const
 {
 	return x;
 }
 
-const int ConsolePoint2D::getY() const
+const int ConsolePoint2D::GetY() const
 {
 	return y;
 }
@@ -81,25 +81,25 @@ const bool ConsolePoint2D::exist() const
 	return x != -1 || y != -1;
 }
 
-void ConsolePoint2D::reSet(const ConsolePoint2D Position)
+void ConsolePoint2D::Set(const ConsolePoint2D Position)
 {
 	x = Position.x;
 	y = Position.y;
 }
 
-void ConsolePoint2D::reSet(const int X, const int Y)
+void ConsolePoint2D::Set(const int X, const int Y)
 {
 	x = X;
 	y = Y;
 }
 
-void ConsolePoint2D::randomSet(const int MaxWidth, const int MaxHeight)
+void ConsolePoint2D::RandomSet(const int MaxWidth, const int MaxHeight)
 {
 	x = Rand() % MaxWidth;
 	y = Rand() % MaxHeight;
 }
 
-void ConsolePoint2D::randomSet(const int Top, const int Bottom, const int Left, const int Right)
+void ConsolePoint2D::RandomSet(const int Top, const int Bottom, const int Left, const int Right)
 {
 	x = Rand() % (Right - Left) + Left;
 	y = Rand() % (Bottom - Top) + Top;

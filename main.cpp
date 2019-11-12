@@ -3,12 +3,12 @@
 using namespace ConsoleEngine;
 
 int main() {
-	Screen.setTitle("Title");
-	Screen.setSize(128, 36);
-	Screen.hideScrollBar();
-	auto temp = Screen.setBackgroundColor(light);
-	Screen.clean();
-	Cursor.hide();
+	Screen.SetTitle("Title");
+	Screen.SetSize(128, 36);
+	Screen.HideScrollBar();
+	auto temp = Screen.SetBackgroundColor(light);
+	Screen.Clean();
+	Cursor.Hide();
 
 	ConsoleScene cScene;
 
@@ -39,12 +39,12 @@ int main() {
 		" V "
 	};
 	ConsoleImage enemy(enemyImage);
-	enemy.setAllColor(light, black);
-	cScene.addObject(enemy, 10, 10);
-	cScene.addObject(enemy, 20, 10);
-	cScene.addObject(enemy, 30, 10);
+	enemy.SetAllColor(light, black);
+	cScene.AddObject(enemy, 10, 10);
+	cScene.AddObject(enemy, 20, 10);
+	cScene.AddObject(enemy, 30, 10);
 
 	while (true)
-		cScene.updateState().render();
+		cScene.UpdateState().Render();
 	return 0;
 }

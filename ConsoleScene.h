@@ -6,7 +6,6 @@ namespace ConsoleEngine
 {
 	class ConsoleScene
 		: private ConsoleObject
-		, private ObjectInterface
 	{
 	private:
 		std::vector<ConsoleObject*> objectList;
@@ -19,15 +18,15 @@ namespace ConsoleEngine
 		const ConsoleScene& operator=(const ConsoleScene& Scene);
 
 		//	get
-		ConsoleScene* getClone()const override;
+		virtual ConsoleScene* GetClone()const override;
 
 		//	add
-		ConsoleScene& addObject(ConsoleObject& newObject);
-		ConsoleScene& addObject(ConsoleObject& newObject, const ConsolePoint2D Position);
-		ConsoleScene& addObject(ConsoleObject& newObject, const int x, const int y);
+		ConsoleScene& AddObject(ConsoleObject& newObject);
+		ConsoleScene& AddObject(ConsoleObject& newObject, const ConsolePoint2D Position);
+		ConsoleScene& AddObject(ConsoleObject& newObject, const int x, const int y);
 
 		//	others
-		const ConsoleScene& updateState();
-		const ConsoleScene& render()const;
+		const ConsoleScene& UpdateState();
+		const ConsoleScene& Render()const override;
 	};
 }

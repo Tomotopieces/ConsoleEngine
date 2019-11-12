@@ -7,7 +7,6 @@ namespace ConsoleEngine
 	using namespace ConsoleController;
 	class ConsoleButton
 		: public ConsoleObject
-		, private ObjectInterface
 	{
 	private:
 		//	color
@@ -42,29 +41,29 @@ namespace ConsoleEngine
 		ConsoleButton(const std::string Text, void(*ActivateFunction)());
 		ConsoleButton(const ConsoleButton& option2);
 		ConsoleButton(ConsoleButton&& option2);
-		const ConsoleButton& operator=(const ConsoleButton& option2);
+		virtual const ConsoleButton& operator=(const ConsoleButton& option2);
 
 		//	get
-		ConsoleButton* getClone()const override;
+		virtual ConsoleButton* GetClone()const override;
 
 		//	set color
-		ConsoleButton& setDefaultBackColor(int Color);
-		ConsoleButton& setDefaultForeColor(int Color);
-		ConsoleButton& setInactiveBackColor(int Color);
-		ConsoleButton& setInactiveForeColor(int Color);
-		ConsoleButton& setActiveBackColor(int Color);
-		ConsoleButton& setActiveForeColor(int Color);
-		ConsoleButton& setUnavailableDefaultBackColor(int Color);
-		ConsoleButton& setUnavailableDefaultForeColor(int Color);
-		ConsoleButton& setUnavailableInactiveBackColor(int Color);
-		ConsoleButton& setUnavailableInactiveForeColor(int Color);
+		ConsoleButton& SetDefaultBackColor(int Color);
+		ConsoleButton& SetDefaultForeColor(int Color);
+		ConsoleButton& SetInactiveBackColor(int Color);
+		ConsoleButton& SetInactiveForeColor(int Color);
+		ConsoleButton& SetActiveBackColor(int Color);
+		ConsoleButton& SetActiveForeColor(int Color);
+		ConsoleButton& SetUnavailableDefaultBackColor(int Color);
+		ConsoleButton& SetUnavailableDefaultForeColor(int Color);
+		ConsoleButton& SetUnavailableInactiveBackColor(int Color);
+		ConsoleButton& SetUnavailableInactiveForeColor(int Color);
 
 		//	set state
-		ConsoleButton& setAvailable(const bool Usable);
-		ConsoleButton& setActivateFunction(void(*ActivateFunction)());
+		ConsoleButton& SetAvailable(const bool Usable);
+		ConsoleButton& SetActivateFunction(void(*ActivateFunction)());
 
 		//	others
-		const ConsoleButton& updateState();
-		const ConsoleButton& render()const;
+		const ConsoleButton& UpdateState();
+		const ConsoleButton& Render()const override;
 	};
 }

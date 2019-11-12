@@ -65,70 +65,70 @@ const ConsoleSprite& ConsoleEngine::ConsoleSprite::operator=(const ConsoleSprite
 	return*this;
 }
 
-ConsoleSprite* ConsoleEngine::ConsoleSprite::getClone() const
+ConsoleSprite* ConsoleEngine::ConsoleSprite::GetClone() const
 {
 	ConsoleSprite* clone = new ConsoleSprite(*this);
 	return clone;
 }
 
-const ConsoleImage& ConsoleEngine::ConsoleSprite::getImage() const
+const ConsoleImage& ConsoleEngine::ConsoleSprite::GetImage() const
 {
 	return image;
 }
 
-const bool ConsoleEngine::ConsoleSprite::getIsTrigger() const
+const bool ConsoleEngine::ConsoleSprite::GetIsTrigger() const
 {
 	return isTrigger;
 }
 
-const int ConsoleEngine::ConsoleSprite::getColliderWidth() const
+const int ConsoleEngine::ConsoleSprite::GetColliderWidth() const
 {
 	return collider.width;
 }
 
-const int ConsoleEngine::ConsoleSprite::getColliderHeight() const
+const int ConsoleEngine::ConsoleSprite::GetColliderHeight() const
 {
 	return collider.height;
 }
 
-const ConsolePoint2D& ConsoleEngine::ConsoleSprite::getColliderStartPoint() const
+const ConsolePoint2D& ConsoleEngine::ConsoleSprite::GetColliderStartPoint() const
 {
 	return collider.upperLeft;
 }
 
-ConsoleSprite& ConsoleEngine::ConsoleSprite::setImgae(const ConsoleImage& Image)
+ConsoleSprite& ConsoleEngine::ConsoleSprite::SetImgae(const ConsoleImage& Image)
 {
 	image = Image;
 	return*this;
 }
 
-ConsoleSprite& ConsoleEngine::ConsoleSprite::setIsTrigger(const bool IsTrigger)
+ConsoleSprite& ConsoleEngine::ConsoleSprite::SetIsTrigger(const bool IsTrigger)
 {
 	isTrigger = IsTrigger;
 	return*this;
 }
 
-ConsoleSprite& ConsoleEngine::ConsoleSprite::setColliderWidth(const int Width)
+ConsoleSprite& ConsoleEngine::ConsoleSprite::SetColliderWidth(const int Width)
 {
 	collider.width = Width;
 	return*this;
 }
 
-ConsoleSprite& ConsoleEngine::ConsoleSprite::setColliderHeight(const int Height)
+ConsoleSprite& ConsoleEngine::ConsoleSprite::SetColliderHeight(const int Height)
 {
 	collider.height = Height;
 	return*this;
 }
 
-ConsoleSprite& ConsoleEngine::ConsoleSprite::setColliderStartPoint(const ConsolePoint2D& Point)
+ConsoleSprite& ConsoleEngine::ConsoleSprite::SetColliderStartPoint(const ConsolePoint2D& Point)
 {
 	collider.upperLeft = Point;
 	return*this;
 }
 
-const ConsoleSprite& ConsoleEngine::ConsoleSprite::render() const
+const ConsoleSprite& ConsoleEngine::ConsoleSprite::Render() const
 {
-	image.render(position);
+	image.Render(position);
 	return*this;
 }
 

@@ -32,14 +32,14 @@ namespace ConsoleEngine
 		operator COORD()const;
 
 		//	get
-		const int getX()const;
-		const int getY()const;
+		const int GetX()const;
+		const int GetY()const;
 
 		//	set
-		void reSet(const ConsolePoint2D Position);
-		void reSet(const int X, const int Y);
-		void randomSet(const int MaxWidth, const int MaxHeight);
-		void randomSet(const int Top, const int Bottom, const int Left, const int Right);
+		void Set(const ConsolePoint2D Position);
+		void Set(const int X, const int Y);
+		void RandomSet(const int MaxWidth, const int MaxHeight);
+		void RandomSet(const int Top, const int Bottom, const int Left, const int Right);
 
 		//	others
 		const bool exist()const;
@@ -70,22 +70,22 @@ namespace ConsoleEngine
 		const T operator[](const ConsolePoint2D pos)const;	// ibid
 
 		// get
-		const int getWidth()const;
-		const int getHeight()const;
-		const std::vector<std::vector<T>> getMap()const;
-		const T& getPoint(const int x, const int y)const;
-		const T& getPoint(const ConsolePoint2D pos)const;
+		const int GetWidth()const;
+		const int GetHeight()const;
+		const std::vector<std::vector<T>> GetMap()const;
+		const T& GetPoint(const int x, const int y)const;
+		const T& GetPoint(const ConsolePoint2D pos)const;
 
 		// set
-		ConsoleMap2D<T>& setWidth(const int Width);
-		ConsoleMap2D<T>& setHeight(const int Height);
-		ConsoleMap2D<T>& setMap(const ConsoleMap2D<T>& Map);
-		ConsoleMap2D<T>& setPoint(const int x, const int y, const T& Data2);
-		ConsoleMap2D<T>& setPoint(ConsolePoint2D pos, const T& Data2);
+		ConsoleMap2D<T>& SetWidth(const int Width);
+		ConsoleMap2D<T>& SetHeight(const int Height);
+		ConsoleMap2D<T>& SetMap(const ConsoleMap2D<T>& Map);
+		ConsoleMap2D<T>& SetPoint(const int x, const int y, const T& Data2);
+		ConsoleMap2D<T>& SetPoint(ConsolePoint2D pos, const T& Data2);
 
 		// others
-		const ConsolePoint2D find(T& data2)const;
-		const std::vector<ConsolePoint2D> findAll(T& data2)const;
+		const ConsolePoint2D Find(T& data2)const;
+		const std::vector<ConsolePoint2D> FindAll(T& data2)const;
 	};
 
 	template<typename T>
@@ -121,7 +121,7 @@ namespace ConsoleEngine
 	{
 		for (int x = 0; x < width; ++x)
 			for (int y = 0; y < height; ++y)
-				if (getPoint(x, y) != Map.getPoint(x, y))
+				if (GetPoint(x, y) != Map.GetPoint(x, y))
 					return false;
 		return true;
 	}
@@ -142,58 +142,58 @@ namespace ConsoleEngine
 	inline const T ConsoleMap2D<T>::operator[](const ConsolePoint2D pos) const
 	{
 		if (pos.exist())
-			return getPoint(pos);
+			return GetPoint(pos);
 		return T();
 	}
 
 	template<typename T>
-	inline const int ConsoleMap2D<T>::getWidth() const
+	inline const int ConsoleMap2D<T>::GetWidth() const
 	{
 		return width;
 	}
 
 	template<typename T>
-	inline const int ConsoleMap2D<T>::getHeight() const
+	inline const int ConsoleMap2D<T>::GetHeight() const
 	{
 		return height;
 	}
 
 	template<typename T>
-	const std::vector<std::vector<T>> ConsoleMap2D<T>::getMap() const
+	const std::vector<std::vector<T>> ConsoleMap2D<T>::GetMap() const
 	{
 		return map;
 	}
 
 	template<typename T>
-	const T& ConsoleMap2D<T>::getPoint(const int x, const int y) const
+	const T& ConsoleMap2D<T>::GetPoint(const int x, const int y) const
 	{
 		return map[x][y];
 	}
 
 	template<typename T>
-	const T& ConsoleMap2D<T>::getPoint(const ConsolePoint2D pos) const
+	const T& ConsoleMap2D<T>::GetPoint(const ConsolePoint2D pos) const
 	{
-		int x = pos.getX() < width ? pos.getX() : width - 1;
-		int y = pos.getY() < height ? pos.getY() : height - 1;
+		int x = pos.GetX() < width ? pos.GetX() : width - 1;
+		int y = pos.GetY() < height ? pos.GetY() : height - 1;
 		return map[x][y];
 	}
 
 	template<typename T>
-	inline ConsoleMap2D<T>& ConsoleMap2D<T>::setWidth(const int Width)
+	inline ConsoleMap2D<T>& ConsoleMap2D<T>::SetWidth(const int Width)
 	{
 		width = Width;
 		return*this;
 	}
 
 	template<typename T>
-	inline ConsoleMap2D<T>& ConsoleMap2D<T>::setHeight(const int Height)
+	inline ConsoleMap2D<T>& ConsoleMap2D<T>::SetHeight(const int Height)
 	{
 		height = Height;
 		return*this;
 	}
 
 	template<typename T>
-	ConsoleMap2D<T>& ConsoleMap2D<T>::setMap(const ConsoleMap2D<T>& Map)
+	ConsoleMap2D<T>& ConsoleMap2D<T>::SetMap(const ConsoleMap2D<T>& Map)
 	{
 		this->map = Map.map;
 		width = Map.width;
@@ -202,36 +202,36 @@ namespace ConsoleEngine
 	}
 
 	template<typename T>
-	ConsoleMap2D<T>& ConsoleMap2D<T>::setPoint(const int x, const int y, const T& Data2)
+	ConsoleMap2D<T>& ConsoleMap2D<T>::SetPoint(const int x, const int y, const T& Data2)
 	{
 		map[x][y] = Data2;
 		return*this;
 	}
 
 	template<typename T>
-	ConsoleMap2D<T>& ConsoleMap2D<T>::setPoint(ConsolePoint2D pos, const T& Data2)
+	ConsoleMap2D<T>& ConsoleMap2D<T>::SetPoint(ConsolePoint2D pos, const T& Data2)
 	{
-		map[pos.getX()][pos.getY()] = Data2;
+		map[pos.GetX()][pos.GetY()] = Data2;
 		return*this;
 	}
 
 	template<typename T>
-	inline const ConsolePoint2D ConsoleMap2D<T>::find(T& data2) const
+	inline const ConsolePoint2D ConsoleMap2D<T>::Find(T& data2) const
 	{
 		for (int x = 0; x < width; ++x)
 			for (int y = 0; y < height; ++y)
-				if (getPoint(x, y) != data2)
+				if (GetPoint(x, y) != data2)
 					return ConsolePoint2D(x, y);
 		return ConsolePoint2D(-1, -1);
 	}
 
 	template<typename T>
-	inline const std::vector<ConsolePoint2D> ConsoleMap2D<T>::findAll(T& data2) const
+	inline const std::vector<ConsolePoint2D> ConsoleMap2D<T>::FindAll(T& data2) const
 	{
 		std::vector<ConsolePoint2D> list;
 		for (int x = 0; x < width; ++x)
 			for (int y = 0; y < height; ++y)
-				if (getPoint(x, y) != data2)
+				if (GetPoint(x, y) != data2)
 					list.push_back(ConsolePoint2D(x, y));
 		return list;
 	}

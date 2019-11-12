@@ -46,57 +46,57 @@ const ConsoleText& ConsoleText::operator=(const ConsoleText& Text)
 	return*this;
 }
 
-ConsoleText* ConsoleEngine::ConsoleText::getClone() const
+ConsoleText* ConsoleEngine::ConsoleText::GetClone() const
 {
 	ConsoleText* clone = new ConsoleText(*this);
 	return clone;
 }
 
-const int ConsoleText::getBackColor() const
+const int ConsoleText::GetBackColor() const
 {
 	return backColor;
 }
 
-const int ConsoleText::getForeColor() const
+const int ConsoleText::GetForeColor() const
 {
 	return foreColor;
 }
 
-ConsoleText& ConsoleText::setBackColor(const int Color)
+ConsoleText& ConsoleText::SetBackColor(const int Color)
 {
 	backColor = Color;
 	return*this;
 }
 
-ConsoleText& ConsoleText::setForeColor(const int Color)
+ConsoleText& ConsoleText::SetForeColor(const int Color)
 {
 	foreColor = Color;
 	return*this;
 }
 
-ConsoleText& ConsoleText::setRenderMode(const RenderMode newMode)
+ConsoleText& ConsoleText::SetRenderMode(const RenderMode newMode)
 {
 	currentMode = newMode;
 	return*this;
 }
 
-const ConsoleText& ConsoleText::render() const
+const ConsoleText& ConsoleText::Render() const
 {
-	Character.setBackColor(backColor);
-	Character.setForeColor(foreColor);
+	Character.SetBackColor(backColor);
+	Character.SetForeColor(foreColor);
 	
 	switch (currentMode) {
 		case Normal:
-			Cursor.setPosition(position);
+			Cursor.SetPosition(position);
 			break;
 		case HorizontallyCentered:
-			Cursor.setPosition((Screen.getSize().X - text.size()) / 2, position.getY());
+			Cursor.SetPosition((Screen.GetSize().X - text.size()) / 2, position.GetY());
 			break;
 		case VerticallyCentered:
-			Cursor.setPosition(position.getX(), Screen.getSize().Y / 2);
+			Cursor.SetPosition(position.GetX(), Screen.GetSize().Y / 2);
 			break;
 		case HorizontallyCentered + VerticallyCentered:
-			Cursor.setPosition((Screen.getSize().X - text.size()) / 2, Screen.getSize().Y / 2);
+			Cursor.SetPosition((Screen.GetSize().X - text.size()) / 2, Screen.GetSize().Y / 2);
 			break;
 	}
 

@@ -12,10 +12,10 @@ namespace  ConsoleController {
 	public:
 		MOUSE();
 
-		static COORD getPosition();
-		static bool leftDown();
-		static bool rightDown();
-		static bool bothDown();
+		static COORD GetPosition();
+		static bool GetLeftDown();
+		static bool GetRightDown();
+		static bool GetBothDown();
 	};
 	extern MOUSE Mouse;
 
@@ -27,10 +27,10 @@ namespace  ConsoleController {
 	public:
 		CURSOR();
 
-		static bool hide();
-		static bool show();
-		static bool setPosition(short x, short y);
-		static bool setPosition(COORD pos);
+		static bool Hide();
+		static bool Show();
+		static bool SetPosition(short x, short y);
+		static bool SetPosition(COORD pos);
 	};
 	extern CURSOR Cursor;
 
@@ -45,16 +45,16 @@ namespace  ConsoleController {
 	public:
 		SCREEN();
 
-		static const COORD getSize();
-		static bool setTitle(const char* str);
-		static bool hideScrollBar();
-		static bool fullScreen();	//	can not support Windows7
-		static bool window();
-		static bool setSize(short width, short height);
-		static int getBackgroundColor();
-		static bool setBackgroundColor(ConsoleColor color);
-		static bool setBackgroundColor(int color);
-		static bool clean();
+		static const COORD GetSize();
+		static bool SetTitle(const char* str);
+		static bool HideScrollBar();
+		static bool FullScreen();	//	can not support Windows7
+		static bool Window();
+		static bool SetSize(short width, short height);
+		static int GetBackgroundColor();
+		static bool SetBackgroundColor(ConsoleColor color);
+		static bool SetBackgroundColor(int color);
+		static bool Clean();
 	};
 	extern SCREEN Screen;
 
@@ -65,12 +65,12 @@ namespace  ConsoleController {
 	public:
 		CHARACTER();
 
-		static int getForeColor();
-		static int getBackColor();
-		static bool setForeColor(ConsoleColor color);
-		static bool setForeColor(int color);
-		static bool setBackColor(ConsoleColor color);
-		static bool setBackColor(int color);
+		static int GetForeColor();
+		static int GetBackColor();
+		static bool SetForeColor(ConsoleColor color);
+		static bool SetForeColor(int color);
+		static bool SetBackColor(ConsoleColor color);
+		static bool SetBackColor(int color);
 	};
 	extern CHARACTER Character;
 }

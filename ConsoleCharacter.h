@@ -6,7 +6,6 @@ namespace ConsoleEngine
 {
 	class ConsoleCharacter
 		: public ConsoleText
-		, private ObjectInterface
 	{
 	private:
 		char character = ' ';
@@ -23,10 +22,10 @@ namespace ConsoleEngine
 		operator char()const;
 
 		//	get
-		ConsoleCharacter* getClone()const override;
-		const char& getCharacter()const;
+		virtual ConsoleCharacter* GetClone()const override;
+		const char& GetCharacter()const;
 
 		//	set
-		const ConsoleCharacter& setCharacter(const char character2);
+		const ConsoleCharacter& SetCharacter(const char character2);
 	};
 }

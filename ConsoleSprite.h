@@ -7,7 +7,6 @@ namespace ConsoleEngine
 {
 	class ConsoleSprite
 		: public ConsoleObject
-		, private ObjectInterface
 	{
 	private:
 		ConsoleImage image;
@@ -37,21 +36,21 @@ namespace ConsoleEngine
 		const ConsoleSprite& operator=(const ConsoleSprite& Sprite);
 
 		//	get
-		ConsoleSprite* getClone()const override;
-		const ConsoleImage& getImage()const;
-		const bool getIsTrigger()const;
-		const int getColliderWidth()const;
-		const int getColliderHeight()const;
-		const ConsolePoint2D& getColliderStartPoint()const;
+		virtual ConsoleSprite* GetClone()const override;
+		const ConsoleImage& GetImage()const;
+		const bool GetIsTrigger()const;
+		const int GetColliderWidth()const;
+		const int GetColliderHeight()const;
+		const ConsolePoint2D& GetColliderStartPoint()const;
 
 		//	set
-		ConsoleSprite& setImgae(const ConsoleImage& Image);
-		ConsoleSprite& setIsTrigger(const bool IsTrigger);
-		ConsoleSprite& setColliderWidth(const int Width);
-		ConsoleSprite& setColliderHeight(const int Height);
-		ConsoleSprite& setColliderStartPoint(const ConsolePoint2D& Point);
+		ConsoleSprite& SetImgae(const ConsoleImage& Image);
+		ConsoleSprite& SetIsTrigger(const bool IsTrigger);
+		ConsoleSprite& SetColliderWidth(const int Width);
+		ConsoleSprite& SetColliderHeight(const int Height);
+		ConsoleSprite& SetColliderStartPoint(const ConsolePoint2D& Point);
 
 		//	others
-		const ConsoleSprite& render()const;
+		const ConsoleSprite& Render()const override;
 	};
 }
