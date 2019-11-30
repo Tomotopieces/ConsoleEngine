@@ -6,9 +6,10 @@ namespace  ConsoleController {
 
 	class MOUSE {
 	private:
+		static DWORD fdwMode;
 		static HANDLE handle;
 		static DWORD numRead;
-		static INPUT_RECORD inrc;
+		static PINPUT_RECORD inrc;
 	public:
 		MOUSE();
 
@@ -45,7 +46,7 @@ namespace  ConsoleController {
 	public:
 		SCREEN();
 
-		static const COORD GetSize();
+		static COORD GetSize();
 		static bool SetTitle(const char* str);
 		static bool HideScrollBar();
 		static bool FullScreen();	//	can not support Windows7

@@ -21,9 +21,9 @@ namespace ConsoleEngine
 		virtual ConsoleScene* GetClone()const override;
 
 		//	add
-		ConsoleScene& AddObject(ConsoleObject& newObject);
-		ConsoleScene& AddObject(ConsoleObject& newObject, const ConsolePoint2D Position);
-		ConsoleScene& AddObject(ConsoleObject& newObject, const int x, const int y);
+		ConsoleScene& AddObject(const ConsoleObject& newObject);
+		ConsoleScene& AddObject(const ConsoleObject& newObject, const ConsolePoint2D Position);
+		ConsoleScene& AddObject(const ConsoleObject& newObject, const int x, const int y);
 
 		//	others
 		const ConsoleScene& UpdateState();

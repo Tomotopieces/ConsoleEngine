@@ -37,13 +37,13 @@ ConsoleScene* ConsoleEngine::ConsoleScene::GetClone() const
 	return clone;
 }
 
-ConsoleScene& ConsoleScene::AddObject(ConsoleObject& newObject)
+ConsoleScene& ConsoleScene::AddObject(const ConsoleObject& newObject)
 {
 	objectList.push_back(newObject.GetClone());
 	return*this;
 }
 
-ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(ConsoleObject& newObject, const ConsolePoint2D Position)
+ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(const ConsoleObject& newObject, const ConsolePoint2D Position)
 {
 	ConsoleObject* clone = newObject.GetClone();
 	clone->SetPosition(Position);
@@ -51,7 +51,7 @@ ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(ConsoleObject& newObject, c
 	return*this;
 }
 
-ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(ConsoleObject& newObject, const int x, const int y)
+ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(const ConsoleObject& newObject, const int x, const int y)
 {
 	ConsoleObject* clone = newObject.GetClone();
 	clone->SetPosition(x, y);

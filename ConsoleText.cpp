@@ -98,6 +98,9 @@ const ConsoleText& ConsoleText::Render() const
 		case HorizontallyCentered + VerticallyCentered:
 			Cursor.SetPosition((Screen.GetSize().X - text.size()) / 2, Screen.GetSize().Y / 2);
 			break;
+		case PointCentered:
+			Cursor.SetPosition(GetPosition().GetX() - text.size() / 2, GetPosition().GetY());
+			break;
 	}
 
 	std::cout << text;

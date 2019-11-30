@@ -1,12 +1,16 @@
 #pragma once
 #include "ConsoleController.h"
-#pragma comment(lib, "ConsoleController.lib")
 #include "ConsoleMap.h"
 #include <string>
 
 namespace ConsoleEngine
 {
-	class ConsoleObject;
+	enum RenderMode {
+		Normal = 0,
+		HorizontallyCentered = 1,
+		VerticallyCentered = 2,
+		PointCentered = 4
+	};
 
 	class ConsoleObject
 	{

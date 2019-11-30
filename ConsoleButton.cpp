@@ -9,11 +9,13 @@ ConsoleButton::ConsoleButton(const std::string Text)
 
 ConsoleButton::ConsoleButton(const std::string Text, const ConsolePoint2D Position)
 	: ConsoleObject(Text, Position)
+	, activateFunction([]() {})
 {
 }
 
 ConsoleButton::ConsoleButton(const std::string Text, const int x, const int y)
 	: ConsoleObject(Text, x, y)
+	, activateFunction([]() {})
 {
 }
 

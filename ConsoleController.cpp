@@ -1,36 +1,38 @@
 #include "ConsoleController.h"
 
+DWORD ConsoleController::MOUSE::fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS;
 HANDLE ConsoleController::MOUSE::handle = *(new HANDLE);
 DWORD ConsoleController::MOUSE::numRead = *(new DWORD);
-INPUT_RECORD ConsoleController::MOUSE::inrc = *(new INPUT_RECORD);
+PINPUT_RECORD ConsoleController::MOUSE::inrc = new INPUT_RECORD[128];
 
 ConsoleController::MOUSE::MOUSE()
 {
 	handle = GetStdHandle(STD_INPUT_HANDLE);
+	SetConsoleMode(handle, fdwMode);
 }
 
 COORD ConsoleController::MOUSE::GetPosition()
 {
-	ReadConsoleInput(handle, &inrc, 1, &numRead);
-	return inrc.Event.MouseEvent.dwMousePosition;
+	auto tempBool = ReadConsoleInput(handle, inrc, 128, &numRead);
+	return inrc->Event.MouseEvent.dwMousePosition;
 }
 
 bool ConsoleController::MOUSE::GetLeftDown()
 {
-	ReadConsoleInput(handle, &inrc, 1, &numRead);
-	return inrc.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED;
+	ReadConsoleInput(handle, inrc, 128, &numRead);
+	return inrc->Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED;
 }
 
 bool ConsoleController::MOUSE::GetRightDown()
 {
-	ReadConsoleInput(handle, &inrc, 1, &numRead);
-	return inrc.Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED;
+	ReadConsoleInput(handle, inrc, 128, &numRead);
+	return inrc->Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED;
 }
 
 bool ConsoleController::MOUSE::GetBothDown()
 {
-	ReadConsoleInput(handle, &inrc, 1, &numRead);
-	return inrc.Event.MouseEvent.dwButtonState == (FROM_LEFT_1ST_BUTTON_PRESSED + RIGHTMOST_BUTTON_PRESSED);
+	ReadConsoleInput(handle, inrc, 128, &numRead);
+	return inrc->Event.MouseEvent.dwButtonState == (FROM_LEFT_1ST_BUTTON_PRESSED + RIGHTMOST_BUTTON_PRESSED);
 }
 
 ConsoleController::MOUSE Mouse;
@@ -90,7 +92,7 @@ ConsoleController::SCREEN::SCREEN()
 	rect = screenBufferInfo.srWindow;
 }
 
-const COORD ConsoleController::SCREEN::GetSize()
+COORD ConsoleController::SCREEN::GetSize()
 {
 	GetConsoleScreenBufferInfo(handle, &screenBufferInfo);
 	return screenBufferInfo.dwSize;

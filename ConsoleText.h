@@ -4,11 +4,6 @@
 namespace ConsoleEngine
 {
 	using namespace ConsoleController;
-	enum RenderMode {
-		Normal,
-		HorizontallyCentered,
-		VerticallyCentered
-	};
 
 	class ConsoleText
 		: public ConsoleObject

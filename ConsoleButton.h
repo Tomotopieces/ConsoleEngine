@@ -26,6 +26,8 @@ namespace ConsoleEngine
 		bool available = true;
 		bool active = false;
 
+		RenderMode currentMode = Normal;
+
 		//	action
 		void(*activateFunction)();
 
