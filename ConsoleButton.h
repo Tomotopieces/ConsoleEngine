@@ -1,12 +1,13 @@
 #pragma once
 #include "ConsoleObject.h"
+#include "ConsoleText.h"
 #include <vector>
 
 namespace ConsoleEngine
 {
 	using namespace ConsoleController;
 	class ConsoleButton
-		: public ConsoleObject
+		: public ConsoleText
 	{
 	private:
 		//	color
@@ -66,6 +67,6 @@ namespace ConsoleEngine
 
 		//	others
 		const ConsoleButton& UpdateState();
-		const ConsoleButton& Render()const override;
+		//const ConsoleButton& Render()const override;
 	};
 }

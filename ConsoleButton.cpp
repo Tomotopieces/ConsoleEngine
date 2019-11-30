@@ -2,31 +2,31 @@
 using namespace ConsoleEngine;
 
 ConsoleButton::ConsoleButton(const std::string Text)
-	: ConsoleObject(Text)
+	: ConsoleText(Text)
 	, activateFunction([]() {})
 {
 }
 
 ConsoleButton::ConsoleButton(const std::string Text, const ConsolePoint2D Position)
-	: ConsoleObject(Text, Position)
+	: ConsoleText(Text, Position)
 	, activateFunction([]() {})
 {
 }
 
 ConsoleButton::ConsoleButton(const std::string Text, const int x, const int y)
-	: ConsoleObject(Text, x, y)
+	: ConsoleText(Text, x, y)
 	, activateFunction([]() {})
 {
 }
 
 ConsoleButton::ConsoleButton(const std::string Text, void(*ActivateFunction)())
-	: ConsoleObject(Text)
+	: ConsoleText(Text)
 	, activateFunction(ActivateFunction)
 {
 }
 
 ConsoleButton::ConsoleButton(const ConsoleButton& button2)
-	: ConsoleObject(button2)
+	: ConsoleText(button2)
 	, defaultBackColor(button2.defaultBackColor)
 	, defaultForeColor(button2.defaultForeColor)
 	, inactiveBackColor(button2.inactiveBackColor)
@@ -45,7 +45,7 @@ ConsoleButton::ConsoleButton(const ConsoleButton& button2)
 }
 
 ConsoleButton::ConsoleButton(ConsoleButton&& button2)
-	: ConsoleObject(button2)
+	: ConsoleText(button2)
 	, defaultBackColor(button2.defaultBackColor)
 	, defaultForeColor(button2.defaultForeColor)
 	, inactiveBackColor(button2.inactiveBackColor)
@@ -68,7 +68,7 @@ const ConsoleButton& ConsoleButton::operator=(const ConsoleButton& button2)
 {
 	if (this == &button2)
 		return*this;
-	ConsoleObject::operator=(button2);
+	ConsoleText::operator=(button2);
 	defaultBackColor = button2.defaultBackColor;
 	defaultForeColor = button2.defaultForeColor;
 	inactiveBackColor = button2.inactiveBackColor;
@@ -175,53 +175,37 @@ ConsoleButton& ConsoleButton::SetActivateFunction(void(*ActivateFunction)())
 
 const ConsoleButton& ConsoleButton::UpdateState()
 {
-	if (catchMouse && Mouse.GetLeftDown() && !active) {
-		if (available) {
-			active = true;
-			activateFunction();
-		}
-	}
-	else if(!catchMouse || !Mouse.GetLeftDown())
-		active = false;
-
-	CatchMouse();
-
-	return*this;
-}
-
-const ConsoleButton& ConsoleButton::Render() const
-{
-	int currentBackColor;
-	int currentForeColor;
 	if (available) {
 		if (catchMouse) {
-			if (active) {
-				currentBackColor = activeBackColor;
-				currentForeColor = activeForeColor;
+			if (Mouse.GetLeftDown()) {
+				backColor = activeBackColor;
+				foreColor = activeForeColor;
+				active = true;
+				activateFunction();
 			}
 			else {
-				currentBackColor = inactiveBackColor;
-				currentForeColor = inactiveForeColor;
+				backColor = inactiveBackColor;
+				foreColor = inactiveForeColor;
+				active = false;
 			}
 		}
 		else {
-			currentBackColor = defaultBackColor;
-			currentForeColor = defaultForeColor;
+			backColor = defaultBackColor;
+			foreColor = defaultForeColor;
 		}
 	}
 	else {
 		if (catchMouse) {
-			currentBackColor = unavailableInactiveBackColor;
-			currentForeColor = unavailableInactiveForeColor;
+			backColor = unavailableInactiveBackColor;
+			foreColor = unavailableInactiveForeColor;
 		}
 		else {
-			currentBackColor = unavailableDefaultBackColor;
-			currentForeColor = unavailableDefaultForeColor;
+			backColor = unavailableDefaultBackColor;
+			foreColor = unavailableDefaultForeColor;
 		}
 	}
 
-	Character.SetBackColor(currentBackColor);
-	Character.SetForeColor(currentForeColor);
-	ConsoleObject::Render();
+	CatchMouse();
+
 	return*this;
 }
