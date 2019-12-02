@@ -1,95 +1,102 @@
-#include "ConsoleObject.h"
 #include <iostream>
-using namespace ConsoleEngine;
-using namespace ConsoleController;
+#include "ConsoleObject.h"
+using namespace console_engine;
+using namespace consolr_controller;
 
-int ConsoleEngine::Rand()
+int console_engine::Rand()
 {
-	static bool Seed = false;
-	if (!Seed) {
-		Seed = true;
-		srand((unsigned)time(NULL));
-	}
-	return rand();
+    static bool Seed = false;
+    if (!Seed) {
+        Seed = true;
+        srand((unsigned)time(NULL));
+    }
+    return rand();
 }
 
-ConsoleObject::ConsoleObject(const std::string Text)
-	: text(Text)
-	, position(0,0)
-{
-}
-
-ConsoleObject::ConsoleObject(const std::string Text, const ConsolePoint2D Position)
-	: text(Text)
-	, position(Position)
+ConsoleObject::ConsoleObject(const std::string text)
+    : _text(text)
+    , _position(0,0)
 {
 }
 
-ConsoleObject::ConsoleObject(const std::string Text, const int x, const int y)
-	: text(Text)
-	, position(x, y)
+ConsoleObject::ConsoleObject(
+    const std::string text,
+    const ConsolePoint2D& position
+)
+    : _text(text)
+    , _position(position)
 {
 }
 
-ConsoleObject::ConsoleObject(const ConsoleObject& object2)
-	: text(object2.text)
-	, position(object2.position)
+ConsoleObject::ConsoleObject(
+    const std::string text,
+    const int x,
+    const int y
+)
+    : _text(text)
+    , _position(x, y)
 {
 }
 
-ConsoleObject::ConsoleObject(ConsoleObject&& object2)
-	: text(object2.text)
-	, position(object2.position)
+ConsoleObject::ConsoleObject(const ConsoleObject& object)
+    : _text(object._text)
+    , _position(object._position)
 {
-	object2.~ConsoleObject();
 }
 
-const ConsoleObject& ConsoleObject::operator=(const ConsoleObject& object2)
+ConsoleObject::ConsoleObject(ConsoleObject&& object)
+    : _text(object._text)
+    , _position(object._position)
 {
-	if (this == &object2)
-		return*this;
-	text = object2.text;
-	position = object2.position;
-	return*this;
+    object.~ConsoleObject();
 }
 
-ConsoleObject* ConsoleEngine::ConsoleObject::GetClone() const
+const ConsoleObject& ConsoleObject::operator=(const ConsoleObject& object)
 {
-	ConsoleObject* temp = new ConsoleObject(*this);
-	return temp;
+    if (this == &object)
+        return*this;
+    _text = object._text;
+    _position = object._position;
+    return*this;
+}
+
+ConsoleObject* console_engine::ConsoleObject::GetClone() const
+{
+    ConsoleObject* temp = new ConsoleObject(*this);
+    return temp;
 }
 
 const std::string ConsoleObject::GetText() const
 {
-	return text;
+    return _text;
 }
 
 const ConsolePoint2D ConsoleObject::GetPosition() const
 {
-	return position;
+    return _position;
 }
 
-ConsoleObject& ConsoleObject::SetText(const std::string Text)
+ConsoleObject& ConsoleObject::SetText(const std::string text)
 {
-	text = Text;
-	return*this;
+    _text = text;
+    return*this;
 }
 
-ConsoleObject& ConsoleObject::SetPosition(const ConsolePoint2D position2)
+ConsoleObject& ConsoleObject::SetPosition(const ConsolePoint2D position)
 {
-	position = position2;
-	return*this;
+    _position = position;
+    return*this;
 }
 
 ConsoleObject& ConsoleObject::SetPosition(const int x, const int y)
 {
-	position = ConsolePoint2D(x, y);
-	return*this;
+    _position = ConsolePoint2D(x, y);
+    return*this;
 }
 
 const ConsoleObject& ConsoleObject::Render() const
 {
-	Cursor.SetPosition(position);
-	std::cout << text;
-	return*this;
+    Cursor.SetPosition(_position);
+    std::cout << _text;
+    return*this;
 }

@@ -1,81 +1,88 @@
 #include "ConsoleScene.h"
 #include "ConsoleButton.h"
 #include "ConsoleText.h"
-using namespace ConsoleEngine;
-using namespace ConsoleController;
+using namespace console_engine;
+using namespace consolr_controller;
 
 ConsoleScene::ConsoleScene()
-	: ConsoleObject("")
+    : ConsoleObject("")
 {
 }
 
-ConsoleScene::ConsoleScene(const ConsoleScene& Scene)
-	: ConsoleObject("")
-	, objectList(Scene.objectList)
+ConsoleScene::ConsoleScene(const ConsoleScene& scene)
+    : ConsoleObject("")
+    , _objectList(scene._objectList)
 {
 }
 
-ConsoleScene::ConsoleScene(ConsoleScene&& Scene)
-	: ConsoleObject("")
-	, objectList(Scene.objectList)
+ConsoleScene::ConsoleScene(ConsoleScene&& scene)
+    : ConsoleObject("")
+    , _objectList(scene._objectList)
 {
-	Scene.~ConsoleScene();
+    scene.~ConsoleScene();
 }
 
-const ConsoleScene& ConsoleScene::operator=(const ConsoleScene& Scene)
+const ConsoleScene& ConsoleScene::operator=(const ConsoleScene& scene)
 {
-	if(this == &Scene)
-		return*this;
-	ConsoleObject::operator=(Scene);
-	objectList = Scene.objectList;
-	return*this;
+    if(this == &scene)
+        return*this;
+    ConsoleObject::operator=(scene);
+    _objectList = scene._objectList;
+    return*this;
 }
 
-ConsoleScene* ConsoleEngine::ConsoleScene::GetClone() const
+ConsoleScene* ConsoleScene::GetClone() const
 {
-	ConsoleScene* clone = new ConsoleScene(*this);
-	return clone;
+    ConsoleScene* clone = new ConsoleScene(*this);
+    return clone;
 }
 
-ConsoleScene& ConsoleScene::AddObject(const ConsoleObject& newObject)
+ConsoleObject* ConsoleScene::operator[](const int number)
 {
-	objectList.push_back(newObject.GetClone());
-	return*this;
+    if(number < _objectList.size())
+        return _objectList[number];
+    return nullptr;
 }
 
-ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(const ConsoleObject& newObject, const ConsolePoint2D Position)
+ConsoleScene& ConsoleScene::AddObject(const ConsoleObject& object)
 {
-	ConsoleObject* clone = newObject.GetClone();
-	clone->SetPosition(Position);
-	objectList.push_back(clone);
-	return*this;
+    _objectList.push_back(object.GetClone());
+    return*this;
 }
 
-ConsoleScene& ConsoleEngine::ConsoleScene::AddObject(const ConsoleObject& newObject, const int x, const int y)
+ConsoleScene& ConsoleScene::AddObject(const ConsoleObject& object, const ConsolePoint2D position)
 {
-	ConsoleObject* clone = newObject.GetClone();
-	clone->SetPosition(x, y);
-	objectList.push_back(clone);
-	return*this;
+    ConsoleObject* clone = object.GetClone();
+    clone->SetPosition(position);
+    _objectList.push_back(clone);
+    return*this;
+}
+
+ConsoleScene& ConsoleScene::AddObject(const ConsoleObject& object, const int x, const int y)
+{
+    ConsoleObject* clone = object.GetClone();
+    clone->SetPosition(x, y);
+    _objectList.push_back(clone);
+    return*this;
 }
 
 const ConsoleScene& ConsoleScene::UpdateState()
 {
-	if (objectList.size() == 0)
-		return*this;
-	for (ConsoleObject* object : objectList) {
-		ConsoleButton* button = dynamic_cast<ConsoleButton*>(object);
-		if(button != nullptr)
-			button->UpdateState();
-	}
-	return*this;
+    if (_objectList.size() == 0)
+        return*this;
+    for (ConsoleObject* object : _objectList) {
+        ConsoleButton* button = dynamic_cast<ConsoleButton*>(object);
+        if(button != nullptr)
+            button->UpdateState();
+    }
+    return*this;
 }
 
 const ConsoleScene& ConsoleScene::Render() const
 {
-	if (objectList.size() == 0)
-		return*this;
-	for (const ConsoleObject* object : objectList)
-		object->Render();
-	return*this;
+    if (_objectList.size() == 0)
+        return*this;
+    for (const ConsoleObject* object : _objectList)
+        object->Render();
+    return*this;
 }

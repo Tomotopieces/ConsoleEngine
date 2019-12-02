@@ -2,31 +2,38 @@
 #include "ConsoleObject.h"
 #include <vector>
 
-namespace ConsoleEngine
+namespace console_engine
 {
-	class ConsoleScene
-		: private ConsoleObject
-	{
-	private:
-		std::vector<ConsoleObject*> objectList;
+    class ConsoleScene
+        : private ConsoleObject
+    {
+    private:
+        std::vector<ConsoleObject*> _objectList;
+    public:
+        //  constructor
+        ConsoleScene();
+        ConsoleScene(const ConsoleScene& scene);
+        ConsoleScene(ConsoleScene&& scene);
+        const ConsoleScene& operator=(const ConsoleScene& scene);
 
-	public:
-		//	constructor
-		ConsoleScene();
-		ConsoleScene(const ConsoleScene& Scene);
-		ConsoleScene(ConsoleScene&& Scene);
-		const ConsoleScene& operator=(const ConsoleScene& Scene);
+        //  get
+        virtual ConsoleScene* GetClone()const override;
+        //  modifiable get element
+        ConsoleObject* operator[](const int number);
 
-		//	get
-		virtual ConsoleScene* GetClone()const override;
+        //  add
+        ConsoleScene& AddObject(const ConsoleObject& object);
+        ConsoleScene& AddObject(
+            const ConsoleObject& object,
+            const ConsolePoint2D position
+        );
+        ConsoleScene& AddObject(const ConsoleObject& object,
+            const int x,
+            const int y
+        );
 
-		//	add
-		ConsoleScene& AddObject(const ConsoleObject& newObject);
-		ConsoleScene& AddObject(const ConsoleObject& newObject, const ConsolePoint2D Position);
-		ConsoleScene& AddObject(const ConsoleObject& newObject, const int x, const int y);
-
-		//	others
-		const ConsoleScene& UpdateState();
-		const ConsoleScene& Render()const override;
-	};
+        //  others
+        const ConsoleScene& UpdateState();
+        const ConsoleScene& Render()const override;
+    };
 }

@@ -1,39 +1,40 @@
 #pragma once
 #include "ConsoleObject.h"
 
-namespace ConsoleEngine
+namespace console_engine
 {
-	using namespace ConsoleController;
+    using namespace consolr_controller;
 
-	class ConsoleText
-		: public ConsoleObject
-	{
-	protected:
-		int backColor = black;
-		int foreColor = light;
-		RenderMode currentMode = Normal;
-	private:
-		explicit ConsoleText();
-	public:
-		//	constructor
-		ConsoleText(const std::string Text);
-		ConsoleText(const std::string Text, const ConsolePoint2D Position);
-		ConsoleText(const std::string Text, const int x, const int y);
-		ConsoleText(const ConsoleText& Text);
-		ConsoleText(ConsoleText&& Text);
-		virtual const ConsoleText& operator=(const ConsoleText& Text);
+    class ConsoleText
+        : public ConsoleObject
+    {
+    private:
+        int _backColor = (int)ConsoleColor::Black;
+        int _foreColor = (int)ConsoleColor::Light;
+        RenderMode _currentMode = RenderMode::Normal;
 
-		//	get
-		virtual ConsoleText* GetClone()const override;
-		const int GetBackColor()const;
-		const int GetForeColor()const;
+        explicit ConsoleText();
+    public:
+        //  constructor
+        ConsoleText(const std::string text);
+        ConsoleText(const std::string text, const ConsolePoint2D position);
+        ConsoleText(const std::string text, const int x, const int y);
+        ConsoleText(const ConsoleText& text);
+        ConsoleText(ConsoleText&& text);
+        virtual const ConsoleText& operator=(const ConsoleText& text);
+        virtual const ConsoleText& operator=(const std::string& text);
 
-		//	set
-		ConsoleText& SetBackColor(const int Color);
-		ConsoleText& SetForeColor(const int Color);
-		ConsoleText& SetRenderMode(const RenderMode newMode);
+        //  get
+        virtual ConsoleText* GetClone()const override;
+        const int GetBackColor()const;
+        const int GetForeColor()const;
 
-		//	others
-		virtual const ConsoleText& Render()const override;
-	};
+        //  set
+        ConsoleText& SetBackColor(const int color);
+        ConsoleText& SetForeColor(const int color);
+        ConsoleText& SetRenderMode(const RenderMode mode);
+
+        //  others
+        virtual const ConsoleText& Render()const override;
+    };
 }

@@ -1,108 +1,126 @@
-#include "ConsoleText.h"
 #include <iostream>
-using namespace ConsoleEngine;
-using namespace ConsoleController;
+#include "ConsoleText.h"
+using namespace console_engine;
+using namespace consolr_controller;
 
-ConsoleText::ConsoleText(const std::string Text)
-	: ConsoleObject(Text)
+ConsoleText::ConsoleText(const std::string text)
+    : ConsoleObject(text)
 {
 }
 
-ConsoleText::ConsoleText(const std::string Text, const ConsolePoint2D Position)
-	: ConsoleObject(Text, Position)
+ConsoleText::ConsoleText(const std::string text, const ConsolePoint2D position)
+    : ConsoleObject(text, position)
 {
 }
 
-ConsoleText::ConsoleText(const std::string Text, const int x, const int y)
-	: ConsoleObject(Text, x, y)
+ConsoleText::ConsoleText(const std::string text, const int x, const int y)
+    : ConsoleObject(text, x, y)
 {
 }
 
-ConsoleText::ConsoleText(const ConsoleText& Text)
-	: ConsoleObject(Text)
-	, backColor(Text.backColor)
-	, foreColor(Text.foreColor)
-	, currentMode(Text.currentMode)
+ConsoleText::ConsoleText(const ConsoleText& text)
+    : ConsoleObject(text)
+    , _backColor(text._backColor)
+    , _foreColor(text._foreColor)
+    , _currentMode(text._currentMode)
 {
 }
 
-ConsoleText::ConsoleText(ConsoleText&& Text)
-	: ConsoleObject(Text)
-	, backColor(Text.backColor)
-	, foreColor(Text.foreColor)
-	, currentMode(Text.currentMode)
+ConsoleText::ConsoleText(ConsoleText&& text)
+    : ConsoleObject(text)
+    , _backColor(text._backColor)
+    , _foreColor(text._foreColor)
+    , _currentMode(text._currentMode)
 {
-	Text.~ConsoleText();
+    text.~ConsoleText();
 }
 
-const ConsoleText& ConsoleText::operator=(const ConsoleText& Text)
+const ConsoleText& ConsoleText::operator=(const ConsoleText& text)
 {
-	if (this == &Text)
-		return*this;
-	ConsoleObject::operator=(Text);
-	backColor = Text.backColor;
-	foreColor = Text.foreColor;
-	currentMode = Text.currentMode;
-	return*this;
+    if (this == &text)
+        return*this;
+    ConsoleObject::operator=(text);
+    _backColor = text._backColor;
+    _foreColor = text._foreColor;
+    _currentMode = text._currentMode;
+    return*this;
 }
 
-ConsoleText* ConsoleEngine::ConsoleText::GetClone() const
+const ConsoleText& ConsoleText::operator=(const std::string& text)
 {
-	ConsoleText* clone = new ConsoleText(*this);
-	return clone;
+    SetText(text);
+    return*this;
+}
+
+ConsoleText* console_engine::ConsoleText::GetClone() const
+{
+    ConsoleText* clone = new ConsoleText(*this);
+    return clone;
 }
 
 const int ConsoleText::GetBackColor() const
 {
-	return backColor;
+    return _backColor;
 }
 
 const int ConsoleText::GetForeColor() const
 {
-	return foreColor;
+    return _foreColor;
 }
 
-ConsoleText& ConsoleText::SetBackColor(const int Color)
+ConsoleText& ConsoleText::SetBackColor(const int color)
 {
-	backColor = Color;
-	return*this;
+    _backColor = color;
+    return*this;
 }
 
-ConsoleText& ConsoleText::SetForeColor(const int Color)
+ConsoleText& ConsoleText::SetForeColor(const int color)
 {
-	foreColor = Color;
-	return*this;
+    _foreColor = color;
+    return*this;
 }
 
-ConsoleText& ConsoleText::SetRenderMode(const RenderMode newMode)
+ConsoleText& ConsoleText::SetRenderMode(const RenderMode mode)
 {
-	currentMode = newMode;
-	return*this;
+    _currentMode = mode;
+    return*this;
 }
 
 const ConsoleText& ConsoleText::Render() const
 {
-	Character.SetBackColor(backColor);
-	Character.SetForeColor(foreColor);
-	
-	switch (currentMode) {
-		case Normal:
-			Cursor.SetPosition(position);
-			break;
-		case HorizontallyCentered:
-			Cursor.SetPosition((Screen.GetSize().X - text.size()) / 2, position.GetY());
-			break;
-		case VerticallyCentered:
-			Cursor.SetPosition(position.GetX(), Screen.GetSize().Y / 2);
-			break;
-		case HorizontallyCentered + VerticallyCentered:
-			Cursor.SetPosition((Screen.GetSize().X - text.size()) / 2, Screen.GetSize().Y / 2);
-			break;
-		case PointCentered:
-			Cursor.SetPosition(GetPosition().GetX() - text.size() / 2, GetPosition().GetY());
-			break;
-	}
+    Character.SetBackColor(_backColor);
+    Character.SetForeColor(_foreColor);
+    
+    switch (_currentMode) {
+        case RenderMode::Normal:
+            Cursor.SetPosition(GetPosition());
+            break;
+        case RenderMode::HorizontallyCentered:
+            Cursor.SetPosition(
+                (Screen.GetSize().X - GetText().size()) / 2,
+                GetPosition().GetY()
+            );
+            break;
+        case RenderMode::VerticallyCentered:
+            Cursor.SetPosition(
+                GetPosition().GetX(),
+                Screen.GetSize().Y / 2
+            );
+            break;
+        case RenderMode::CompletelyCentered:
+            Cursor.SetPosition(
+                (Screen.GetSize().X - GetText().size()) / 2,
+                Screen.GetSize().Y / 2
+            );
+            break;
+        case RenderMode::PointCentered:
+            Cursor.SetPosition(
+                GetPosition().GetX() - GetText().size() / 2,
+                GetPosition().GetY()
+            );
+            break;
+    }
 
-	std::cout << text;
-	return*this;
+    std::cout << GetText();
+    return*this;
 }

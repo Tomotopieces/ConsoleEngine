@@ -1,212 +1,236 @@
 #include "ConsoleController.h"
+using namespace consolr_controller;
 
-DWORD ConsoleController::MOUSE::fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS;
-HANDLE ConsoleController::MOUSE::handle = *(new HANDLE);
-DWORD ConsoleController::MOUSE::numRead = *(new DWORD);
-PINPUT_RECORD ConsoleController::MOUSE::inrc = new INPUT_RECORD[128];
+DWORD MOUSE::_fdwMode = (
+    ENABLE_WINDOW_INPUT | 
+    ENABLE_MOUSE_INPUT | 
+    ENABLE_EXTENDED_FLAGS
+    );
+HANDLE MOUSE::_handle = *(new HANDLE);
+DWORD MOUSE::_numRead = *(new DWORD);
+PINPUT_RECORD MOUSE::_inrc = new INPUT_RECORD[128];
 
-ConsoleController::MOUSE::MOUSE()
+MOUSE::MOUSE()
 {
-	handle = GetStdHandle(STD_INPUT_HANDLE);
-	SetConsoleMode(handle, fdwMode);
+    _handle = GetStdHandle(STD_INPUT_HANDLE);
+    SetConsoleMode(_handle, _fdwMode);
 }
 
-COORD ConsoleController::MOUSE::GetPosition()
+COORD MOUSE::GetPosition()
 {
-	auto tempBool = ReadConsoleInput(handle, inrc, 128, &numRead);
-	return inrc->Event.MouseEvent.dwMousePosition;
+    auto tempBool = ReadConsoleInput(_handle, _inrc, 128, &_numRead);
+    return _inrc->Event.MouseEvent.dwMousePosition;
 }
 
-bool ConsoleController::MOUSE::GetLeftDown()
+bool MOUSE::GetLeftDown()
 {
-	ReadConsoleInput(handle, inrc, 128, &numRead);
-	return inrc->Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED;
+    ReadConsoleInput(_handle, _inrc, 128, &_numRead);
+    return _inrc->Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED;
 }
 
-bool ConsoleController::MOUSE::GetRightDown()
+bool MOUSE::GetRightDown()
 {
-	ReadConsoleInput(handle, inrc, 128, &numRead);
-	return inrc->Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED;
+    ReadConsoleInput(_handle, _inrc, 128, &_numRead);
+    return _inrc->Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED;
 }
 
-bool ConsoleController::MOUSE::GetBothDown()
+bool MOUSE::GetBothDown()
 {
-	ReadConsoleInput(handle, inrc, 128, &numRead);
-	return inrc->Event.MouseEvent.dwButtonState == (FROM_LEFT_1ST_BUTTON_PRESSED + RIGHTMOST_BUTTON_PRESSED);
+    ReadConsoleInput(_handle, _inrc, 128, &_numRead);
+    return _inrc->Event.MouseEvent.dwButtonState == (
+        FROM_LEFT_1ST_BUTTON_PRESSED +
+        RIGHTMOST_BUTTON_PRESSED
+        );
 }
 
-ConsoleController::MOUSE Mouse;
+MOUSE Mouse;
 
 //****************************************
 //****************************************
 
-HANDLE ConsoleController::CURSOR::handle = *(new HANDLE);
-CONSOLE_CURSOR_INFO ConsoleController::CURSOR::CursorInfo = *(new CONSOLE_CURSOR_INFO);
-COORD ConsoleController::CURSOR::coord = *(new COORD);
+HANDLE CURSOR::_handle = *(new HANDLE);
+CONSOLE_CURSOR_INFO CURSOR::_CursorInfo = *(
+    new CONSOLE_CURSOR_INFO
+    );
+COORD CURSOR::_coord = *(new COORD);
 
-ConsoleController::CURSOR::CURSOR()
+CURSOR::CURSOR()
 {
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	GetConsoleCursorInfo(handle, &CursorInfo);
+    _handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleCursorInfo(_handle, &_CursorInfo);
 }
 
-bool ConsoleController::CURSOR::Hide()
+bool CURSOR::Hide()
 {
-	CursorInfo.bVisible = false;
-	return SetConsoleCursorInfo(handle, &CursorInfo);
+    _CursorInfo.bVisible = false;
+    return SetConsoleCursorInfo(_handle, &_CursorInfo);
 }
 
-bool ConsoleController::CURSOR::Show()
+bool CURSOR::Show()
 {
-	CursorInfo.bVisible = true;
-	return SetConsoleCursorInfo(handle, &CursorInfo);
+    _CursorInfo.bVisible = true;
+    return SetConsoleCursorInfo(_handle, &_CursorInfo);
 }
 
-bool ConsoleController::CURSOR::SetPosition(short x, short y)
+bool CURSOR::SetPosition(short x, short y)
 {
-	coord = { x,y };
-	return SetConsoleCursorPosition(handle, coord);
+    _coord = { x,y };
+    return SetConsoleCursorPosition(_handle, _coord);
 }
 
-bool ConsoleController::CURSOR::SetPosition(COORD pos)
+bool CURSOR::SetPosition(COORD pos)
 {
-	coord = pos;
-	return SetConsoleCursorPosition(handle, coord);
+    _coord = pos;
+    return SetConsoleCursorPosition(_handle, _coord);
 }
 
-ConsoleController::CURSOR Cursor;
+CURSOR Cursor;
 
 //****************************************
 //****************************************
 
-HANDLE ConsoleController::SCREEN::handle = *(new HANDLE);
-CONSOLE_SCREEN_BUFFER_INFO ConsoleController::SCREEN::screenBufferInfo = *(new CONSOLE_SCREEN_BUFFER_INFO);
-SMALL_RECT ConsoleController::SCREEN::rect = *(new SMALL_RECT);
-COORD ConsoleController::SCREEN::coord = *(new COORD);
-int ConsoleController::SCREEN::backgroundColor = ConsoleController::black;
+HANDLE SCREEN::_handle = *(new HANDLE);
+CONSOLE_SCREEN_BUFFER_INFO SCREEN::_screenBufferInfo = *(
+    new CONSOLE_SCREEN_BUFFER_INFO
+    );
+SMALL_RECT SCREEN::_rect = *(new SMALL_RECT);
+COORD SCREEN::_coord = *(new COORD);
+int SCREEN::_backgroundColor = 
+    (int)ConsoleColor::Black;
 
-ConsoleController::SCREEN::SCREEN()
+SCREEN::SCREEN()
 {
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	GetConsoleScreenBufferInfo(handle, &screenBufferInfo);
-	rect = screenBufferInfo.srWindow;
+    _handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(_handle, &_screenBufferInfo);
+    _rect = _screenBufferInfo.srWindow;
 }
 
-COORD ConsoleController::SCREEN::GetSize()
+COORD SCREEN::GetSize()
 {
-	GetConsoleScreenBufferInfo(handle, &screenBufferInfo);
-	return screenBufferInfo.dwSize;
+    GetConsoleScreenBufferInfo(_handle, &_screenBufferInfo);
+    return _screenBufferInfo.dwSize;
 }
 
-bool ConsoleController::SCREEN::SetTitle(const char* str)
+bool SCREEN::SetTitle(const char* str)
 {
-	return SetConsoleTitle(LPCSTR(str));
+    return SetConsoleTitle(LPCSTR(str));
 }
 
-bool ConsoleController::SCREEN::HideScrollBar()
+bool SCREEN::HideScrollBar()
 {
-	coord = { rect.Right + 1,rect.Bottom + 1 };
-	return SetConsoleScreenBufferSize(handle, coord);
+    _coord = { _rect.Right + 1,_rect.Bottom + 1 };
+    return SetConsoleScreenBufferSize(_handle, _coord);
 }
 
-bool ConsoleController::SCREEN::FullScreen()
+bool SCREEN::FullScreen()
 {
-	coord = { 1920,1080 };
-	SetConsoleScreenBufferSize(handle, coord);
-	return SetConsoleDisplayMode(handle, CONSOLE_FULLSCREEN_MODE, &coord);
+    _coord = { 1920,1080 };
+    SetConsoleScreenBufferSize(_handle, _coord);
+    return SetConsoleDisplayMode(_handle, CONSOLE_FULLSCREEN_MODE, &_coord);
 }
 
-bool ConsoleController::SCREEN::Window()
+bool SCREEN::Window()
 {
-	coord = { 0,0 };
-	return SetConsoleDisplayMode(handle, CONSOLE_WINDOWED_MODE, &coord);
+    _coord = { 0,0 };
+    return SetConsoleDisplayMode(_handle, CONSOLE_WINDOWED_MODE, &_coord);
 }
 
-bool ConsoleController::SCREEN::SetSize(short width, short height)
+bool SCREEN::SetSize(short width, short height)
 {
-	rect.Right = rect.Left + width;
-	rect.Bottom = rect.Top + height;
-	coord = { width * 2, height * 2 };
-	SetConsoleScreenBufferSize(handle, coord);
-	return SetConsoleWindowInfo(handle, true, &rect);
+    _rect.Right = _rect.Left + width;
+    _rect.Bottom = _rect.Top + height;
+    _coord = { width * 2, height * 2 };
+    SetConsoleScreenBufferSize(_handle, _coord);
+    return SetConsoleWindowInfo(_handle, true, &_rect);
 }
 
-int ConsoleController::SCREEN::GetBackgroundColor()
+int SCREEN::GetBackgroundColor()
 {
-	return backgroundColor;
+    return _backgroundColor;
 }
 
-bool ConsoleController::SCREEN::Clean()
+bool SCREEN::Clean()
 {
-	coord = { 0,0 };
-	DWORD dw;
-	FillConsoleOutputAttribute(handle, WORD(backgroundColor * 16), GetSize().X * GetSize().Y, coord, &dw);
-	return FillConsoleOutputCharacter(handle, ' ', GetSize().X * GetSize().Y, coord, &dw);
+    _coord = { 0,0 };
+    DWORD dw;
+    FillConsoleOutputAttribute(
+        _handle,
+        WORD(_backgroundColor * 16),
+        GetSize().X * GetSize().Y,
+        _coord, &dw
+    );
+    return FillConsoleOutputCharacter(
+        _handle,
+        ' ',
+        GetSize().X * GetSize().Y,
+        _coord,
+        &dw
+    );
 }
 
-bool ConsoleController::SCREEN::SetBackgroundColor(ConsoleColor color)
+bool SCREEN::SetBackgroundColor(ConsoleColor color)
 {
-	backgroundColor = color;
-	return SetConsoleTextAttribute(handle, WORD(color * 16));
+    _backgroundColor = (int)color;
+    return SetConsoleTextAttribute(_handle, WORD((int)color * 16));
 }
 
-bool ConsoleController::SCREEN::SetBackgroundColor(int color)
+bool SCREEN::SetBackgroundColor(int color)
 {
-	backgroundColor = color;
-	return SetConsoleTextAttribute(handle, WORD(color * 16));
+    _backgroundColor = color;
+    return SetConsoleTextAttribute(_handle, WORD(color * 16));
 }
 
-ConsoleController::SCREEN Screen;
+SCREEN Screen;
 
 //****************************************
 //****************************************
 
-HANDLE ConsoleController::CHARACTER::handle = *(new HANDLE);
-int ConsoleController::CHARACTER::currentColor = 0;
+HANDLE CHARACTER::_handle = *(new HANDLE);
+int CHARACTER::_currentColor = 0;
 
-ConsoleController::CHARACTER::CHARACTER()
+CHARACTER::CHARACTER()
 {
-	handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    _handle = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
-int ConsoleController::CHARACTER::GetForeColor()
+int CHARACTER::GetForeColor()
 {
-	return currentColor / 16;
+    return _currentColor / 16;
 }
 
-int ConsoleController::CHARACTER::GetBackColor()
+int CHARACTER::GetBackColor()
 {
-	return currentColor % 16;
+    return _currentColor % 16;
 }
 
-bool ConsoleController::CHARACTER::SetForeColor(ConsoleColor color)
+bool CHARACTER::SetForeColor(ConsoleColor color)
 {
-	currentColor /= 16;
-	currentColor *= 16;
-	currentColor += color;
-	return SetConsoleTextAttribute(handle, WORD(currentColor));
+    _currentColor /= 16;
+    _currentColor *= 16;
+    _currentColor += (int)color;
+    return SetConsoleTextAttribute(_handle, WORD(_currentColor));
 }
 
-bool ConsoleController::CHARACTER::SetForeColor(int color)
+bool CHARACTER::SetForeColor(int color)
 {
-	currentColor /= 16;
-	currentColor *= 16;
-	currentColor += color;
-	return SetConsoleTextAttribute(handle, WORD(currentColor));
+    _currentColor /= 16;
+    _currentColor *= 16;
+    _currentColor += color;
+    return SetConsoleTextAttribute(_handle, WORD(_currentColor));
 }
 
-bool ConsoleController::CHARACTER::SetBackColor(ConsoleColor color)
+bool CHARACTER::SetBackColor(ConsoleColor color)
 {
-	currentColor %= 16;
-	currentColor += int(color) * 16;
-	return SetConsoleTextAttribute(handle, WORD(currentColor));
+    _currentColor %= 16;
+    _currentColor += int(color) * 16;
+    return SetConsoleTextAttribute(_handle, WORD(_currentColor));
 }
 
-bool ConsoleController::CHARACTER::SetBackColor(int color)
+bool CHARACTER::SetBackColor(int color)
 {
-	currentColor %= 16;
-	currentColor += color * 16;
-	return SetConsoleTextAttribute(handle, WORD(currentColor));
+    _currentColor %= 16;
+    _currentColor += color * 16;
+    return SetConsoleTextAttribute(_handle, WORD(_currentColor));
 }
 
-ConsoleController::CHARACTER Character;
+CHARACTER Character;

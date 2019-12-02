@@ -1,76 +1,85 @@
-#include "ConsoleCharacter.h"
 #include <iostream>
-using namespace ConsoleEngine;
+#include "ConsoleCharacter.h"
+using namespace console_engine;
 
-ConsoleCharacter::ConsoleCharacter(const char Character)
-	: ConsoleText("")
-	, character(Character)
+ConsoleCharacter::ConsoleCharacter(const char character)
+    : ConsoleText("")
+    , _character(character)
 {
-	text = character;
+    SetText(std::to_string(_character));
 }
 
-ConsoleCharacter::ConsoleCharacter(const char Character, const ConsolePoint2D& Position)
-	: ConsoleText("", Position)
-	, character(Character)
+ConsoleCharacter::ConsoleCharacter(
+    const char character,
+    const ConsolePoint2D& position
+)
+    : ConsoleText("", position)
+    , _character(character)
 {
-	text = character;
+    SetText(std::to_string(_character));
 }
 
-ConsoleCharacter::ConsoleCharacter(const char Character, const int x, const int y)
-	: ConsoleText("", x, y)
-	, character(Character)
+ConsoleCharacter::ConsoleCharacter(
+    const char character,
+    const int x,
+    const int y
+)
+    : ConsoleText("", x, y)
+    , _character(character)
 {
-	text = character;
+    SetText(std::to_string(_character));
 }
 
-ConsoleCharacter::ConsoleCharacter(const ConsoleCharacter& Character)
-	: ConsoleText(Character)
-	, character(Character.character)
+ConsoleCharacter::ConsoleCharacter(const ConsoleCharacter& character)
+    : ConsoleText(character)
+    , _character(character._character)
 {
-	text = character;
+    SetText(std::to_string(_character));
 }
 
-ConsoleCharacter::ConsoleCharacter(ConsoleCharacter&& Character)
-	: ConsoleText(Character)
-	, character(Character.character)
+ConsoleCharacter::ConsoleCharacter(ConsoleCharacter&& character)
+    : ConsoleText(character)
+    , _character(character._character)
 {
-	text = character;
-	Character.~ConsoleCharacter();
+    SetText(std::to_string(_character));
+    character.~ConsoleCharacter();
 }
 
-const ConsoleCharacter& ConsoleCharacter::operator=(const ConsoleCharacter& Character)
+const ConsoleCharacter& ConsoleCharacter::operator=(
+    const ConsoleCharacter& character
+    )
 {
-	if (this == &Character)
-		return*this;
-	text = character;
-	ConsoleText::operator=(Character);
-	character = Character.character;
-	return*this;
+    if (this == &character)
+        return*this;
+    SetText(std::to_string(_character));
+    ConsoleText::operator=(character);
+    _character = character._character;
+    return*this;
 }
 
-const bool ConsoleCharacter::operator==(char Character) const
+const bool ConsoleCharacter::operator==(char character) const
 {
-	return character == Character;
+    return _character == character;
 }
 
 ConsoleCharacter::operator char() const
 {
-	return character;
+    return _character;
 }
 
-ConsoleCharacter* ConsoleEngine::ConsoleCharacter::GetClone() const
+ConsoleCharacter* ConsoleCharacter::GetClone() const
 {
-	ConsoleCharacter* clone = new ConsoleCharacter(*this);
-	return clone;
+    ConsoleCharacter* clone = new ConsoleCharacter(*this);
+    return clone;
 }
 
 const char& ConsoleCharacter::GetCharacter() const
 {
-	return character;
+    return _character;
 }
 
-const ConsoleCharacter& ConsoleCharacter::SetCharacter(const char character2)
+const ConsoleCharacter& ConsoleCharacter::SetCharacter(const char character)
 {
-	character = character2;
-	return*this;
+    _character = character;
+    return*this;
 }

@@ -1,56 +1,54 @@
 #pragma once
 #include "ConsoleImage.h"
-#include <vector>
-#include <string>
 
-namespace ConsoleEngine
+namespace console_engine
 {
-	class ConsoleSprite
-		: public ConsoleObject
-	{
-	private:
-		ConsoleImage image;
-		bool isTrigger = false;
-		struct ColliderState
-		{
-			int width = 1;
-			int height = 1;
-			ConsolePoint2D upperLeft = { 0,0 };
-		};
-		ColliderState collider;
-		explicit ConsoleSprite();
-	public:
-		//	construct by rawImage
-		ConsoleSprite(const RawImage& Image);
-		ConsoleSprite(const RawImage& Image, const ConsolePoint2D& Position);
-		ConsoleSprite(const RawImage& Image, const int x, const int y);
+    class ConsoleSprite
+        : public ConsoleObject
+    {
+    private:
+        ConsoleImage _image;
+        bool _isTrigger = false;
+        struct ColliderState
+        {
+            int width = 1;
+            int height = 1;
+            ConsolePoint2D upperLeft = { 0,0 };
+        };
+        ColliderState _collider;
+        explicit ConsoleSprite();
+    public:
+        //  construct by rawImage
+        ConsoleSprite(const RawImage& image);
+        ConsoleSprite(const RawImage& image, const ConsolePoint2D& position);
+        ConsoleSprite(const RawImage& image, const int x, const int y);
 
-		//	construct by ConsoleImage
-		ConsoleSprite(const ConsoleImage& Image);
-		ConsoleSprite(ConsoleImage&& Image);
-		const ConsoleSprite& operator=(const ConsoleImage& Image);
+        //  construct by ConsoleImage
+        ConsoleSprite(const ConsoleImage& image);
+        ConsoleSprite(ConsoleImage&& image);
+        const ConsoleSprite& operator=(const ConsoleImage& image);
 
-		//	construct by other Sprite
-		ConsoleSprite(const ConsoleSprite& Sprite);
-		ConsoleSprite(ConsoleSprite&& Sprite);
-		const ConsoleSprite& operator=(const ConsoleSprite& Sprite);
+        //  construct by other Sprite
+        ConsoleSprite(const ConsoleSprite& sprite);
+        ConsoleSprite(ConsoleSprite&& sprite);
+        const ConsoleSprite& operator=(const ConsoleSprite& sprite);
 
-		//	get
-		virtual ConsoleSprite* GetClone()const override;
-		const ConsoleImage& GetImage()const;
-		const bool GetIsTrigger()const;
-		const int GetColliderWidth()const;
-		const int GetColliderHeight()const;
-		const ConsolePoint2D& GetColliderStartPoint()const;
+        //  get
+        virtual ConsoleSprite* GetClone()const override;
+        const ConsoleImage& GetImage()const;
+        const bool IsTrigger()const;
+        const int GetColliderWidth()const;
+        const int GetColliderHeight()const;
+        const ConsolePoint2D& GetColliderStartPoint()const;
 
-		//	set
-		ConsoleSprite& SetImgae(const ConsoleImage& Image);
-		ConsoleSprite& SetIsTrigger(const bool IsTrigger);
-		ConsoleSprite& SetColliderWidth(const int Width);
-		ConsoleSprite& SetColliderHeight(const int Height);
-		ConsoleSprite& SetColliderStartPoint(const ConsolePoint2D& Point);
+        //  set
+        ConsoleSprite& SetImgae(const ConsoleImage& image);
+        ConsoleSprite& SetIsTrigger(const bool isTrigger);
+        ConsoleSprite& SetColliderWidth(const int width);
+        ConsoleSprite& SetColliderHeight(const int height);
+        ConsoleSprite& SetColliderStartPoint(const ConsolePoint2D& point);
 
-		//	others
-		const ConsoleSprite& Render()const override;
-	};
+        //  others
+        const ConsoleSprite& Render()const override;
+    };
 }

@@ -1,72 +1,76 @@
 #pragma once
-#include "ConsoleObject.h"
-#include "ConsoleText.h"
 #include <vector>
+#include "ConsoleText.h"
 
-namespace ConsoleEngine
+namespace console_engine
 {
-	using namespace ConsoleController;
-	class ConsoleButton
-		: public ConsoleText
-	{
-	private:
-		//	color
-		int defaultBackColor = light;
-		int defaultForeColor = black;
-		int inactiveBackColor = white;			//getMouse without get leftDown
-		int inactiveForeColor = black;
-		int activeBackColor = white + light;
-		int activeForeColor = black;
-		int unavailableDefaultBackColor = red;
-		int unavailableDefaultForeColor = black;
-		int unavailableInactiveBackColor = red + light;
-		int unavailableInactiveForeColor = black;
+    class ConsoleButton
+        : public ConsoleText
+    {
+    private:
+        //  color
+        int _defaultBackColor = (int)ConsoleColor::Light;
+        int _defaultForeColor = (int)ConsoleColor::Black;
+            //  getMouse without get leftDown
+        int _inactiveBackColor = (int)ConsoleColor::White;
+        int _inactiveForeColor = (int)ConsoleColor::Black;
+        int _activeBackColor =
+            (int)ConsoleColor::White + (int)ConsoleColor::Light;
+        int _activeForeColor = (int)ConsoleColor::Black;
+        int _unavailableDefaultBackColor = (int)ConsoleColor::Red;
+        int _unavailableDefaultForeColor = (int)ConsoleColor::Black;
+        int _unavailableInactiveBackColor =
+            (int)ConsoleColor::Red + (int)ConsoleColor::Light;
+        int _unavailableInactiveForeColor = (int)ConsoleColor::Black;
 
-		//	state
-		bool catchMouse = false;
-		bool available = true;
-		bool active = false;
+        //  state
+        bool _catchMouse = false;
+        bool _available = true;
+        bool _active = false;
+            //  use Drag() instead of activateFunction() if true
+        bool _draggable = false;
 
-		RenderMode currentMode = Normal;
+        //  action
+        void(*_activateFunction)();
+        int _dragOffset = 0;
+        void Drag();
 
-		//	action
-		void(*activateFunction)();
+        //  others
+        const bool CatchMouse();
 
-		//	others
-		const bool CatchMouse();
+        explicit ConsoleButton();
+    public:
+        //  constructor
+        ConsoleButton(const std::string text);
+        ConsoleButton(const std::string text, const ConsolePoint2D position);
+        ConsoleButton(const std::string text, const int x, const int y);
+        ConsoleButton(const std::string text, void(*activateFunction)());
+        ConsoleButton(const ConsoleButton& button);
+        ConsoleButton(ConsoleButton&& button);
+        virtual const ConsoleButton& operator=(const ConsoleButton& button);
 
-		explicit ConsoleButton();
-	public:
-		//	constructor
-		ConsoleButton(const std::string Text);
-		ConsoleButton(const std::string Text, const ConsolePoint2D Position);
-		ConsoleButton(const std::string Text, const int x, const int y);
-		ConsoleButton(const std::string Text, void(*ActivateFunction)());
-		ConsoleButton(const ConsoleButton& option2);
-		ConsoleButton(ConsoleButton&& option2);
-		virtual const ConsoleButton& operator=(const ConsoleButton& option2);
+        //  get
+        virtual ConsoleButton* GetClone()const override;
+        const bool IsDraggable()const;
 
-		//	get
-		virtual ConsoleButton* GetClone()const override;
+        //  set color
+        ConsoleButton& SetDefaultBackColor(int color);
+        ConsoleButton& SetDefaultForeColor(int color);
+        ConsoleButton& SetInactiveBackColor(int color);
+        ConsoleButton& SetInactiveForeColor(int color);
+        ConsoleButton& SetActiveBackColor(int color);
+        ConsoleButton& SetActiveForeColor(int color);
+        ConsoleButton& SetUnavailableDefaultBackColor(int color);
+        ConsoleButton& SetUnavailableDefaultForeColor(int color);
+        ConsoleButton& SetUnavailableInactiveBackColor(int color);
+        ConsoleButton& SetUnavailableInactiveForeColor(int color);
 
-		//	set color
-		ConsoleButton& SetDefaultBackColor(int Color);
-		ConsoleButton& SetDefaultForeColor(int Color);
-		ConsoleButton& SetInactiveBackColor(int Color);
-		ConsoleButton& SetInactiveForeColor(int Color);
-		ConsoleButton& SetActiveBackColor(int Color);
-		ConsoleButton& SetActiveForeColor(int Color);
-		ConsoleButton& SetUnavailableDefaultBackColor(int Color);
-		ConsoleButton& SetUnavailableDefaultForeColor(int Color);
-		ConsoleButton& SetUnavailableInactiveBackColor(int Color);
-		ConsoleButton& SetUnavailableInactiveForeColor(int Color);
+        //  set state
+        ConsoleButton& SetAvailable(const bool available);
+        ConsoleButton& SetActivateFunction(void(*activateFunction)());
 
-		//	set state
-		ConsoleButton& SetAvailable(const bool Usable);
-		ConsoleButton& SetActivateFunction(void(*ActivateFunction)());
-
-		//	others
-		const ConsoleButton& UpdateState();
-		//const ConsoleButton& Render()const override;
-	};
+        //  others
+        const ConsoleButton& UpdateState();
+        const ConsoleButton& SetDraggable(const bool draggable);
+    };
 }
